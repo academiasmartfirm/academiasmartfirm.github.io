@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Academia Smart Firm | Elevating Academic Excellence</title>
+  <!-- Optional fonts for better Arabic and English rendering -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root{
+      --brand-start:#667eea;
+      --brand-end:#764ba2;
+      --cta-start:#4A9EFF;
+      --cta-end:#2563EB;
+      --ink:#333;
+      --ink-sub:#666;
+      --footer:#333;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--ink);
+      overflow-x: hidden;
+      background: #fff;
+    }
+
+    html[dir="rtl"] body{
+      font-family: 'Cairo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      transition: all 0.3s ease;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .logo img { height: 40px; width: auto; }
+
+    .nav-right{
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-links { display: flex; list-style: none; gap: 2rem; }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover { color: #667eea; }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: linear-gradient(135deg, var(--brand-start) 0%, var(--brand-end) 100%);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* Language toggle */
+    .lang-toggle{
+      display: inline-flex;
+      padding: 4px;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 999px;
+      background: rgba(0,0,0,0.04);
+      gap: 4px;
+    }
+    .lang-btn{
+      border: 0;
+      background: transparent;
+      padding: 6px 10px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 999px;
+      font-size: 0.9rem;
+    }
+    .lang-btn.active{
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    /* Hero */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(135deg, var(--brand-start) 0%, var(--brand-end) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,1000 1000,800 1000,1000"/></svg>');
+      animation: float 20s ease-in-out infinite;
+    }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+    .hero-content { max-width: 800px; z-index: 2; position: relative; }
+    .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; opacity: 0; animation: slideUp 1s ease 0.5s forwards; }
+    .hero p { font-size: 1.3rem; margin-bottom: 2rem; opacity: 0; animation: slideUp 1s ease 0.7s forwards; }
+    .cta-button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      opacity: 0;
+      animation: slideUp 1s ease 0.9s forwards;
+    }
+    .cta-button:hover { background: white; color: #667eea; transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+
+    @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Sections */
+    .section { padding: 6rem 5%; max-width: 1400px; margin: 0 auto; }
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 3rem;
+      background: linear-gradient(135deg, var(--brand-start) 0%, var(--brand-end) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .service-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2); }
+    .service-icon {
+      width: 60px; height: 60px;
+      background: linear-gradient(135deg, var(--brand-start) 0%, var(--brand-end) 100%);
+      border-radius: 15px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem; color: white; font-size: 1.5rem;
+    }
+    .service-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; color: var(--ink); }
+    .service-card p { color: var(--ink-sub); line-height: 1.6; }
+
+    /* Our Impact */
+    .stats {
+      background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+      color: white;
+      text-align: center;
+      padding: 4rem 5%;
+    }
+    .stats .section-title{
+      background: none;
+      -webkit-background-clip: initial;
+      background-clip: initial;
+      -webkit-text-fill-color: #fff;
+      color: #fff;
+      font-weight: 800;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .stat-item h3 { font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .stat-item p { font-size: 1.1rem; opacity: 0.95; }
+    html[dir="rtl"] .stat-item h3{ direction: ltr; } /* keep numerals readable */
+
+    /* About */
+    .about { background: #f8fafc; }
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-text p { font-size: 1.1rem; color: var(--ink-sub); margin-bottom: 1.5rem; line-height: 1.8; }
+    .expertise-list { list-style: none; margin-top: 2rem; }
+    .expertise-list li { padding: 0.5rem 0; color: #555; position: relative; padding-left: 2rem; }
+    .expertise-list li::before { content: '✓'; position: absolute; left: 0; color: #667eea; font-weight: bold; }
+    html[dir="rtl"] .expertise-list li{ padding-left: 0; padding-right: 2rem; }
+    html[dir="rtl"] .expertise-list li::before{ left: auto; right: 0; }
+
+    /* Testimonial */
+    .testimonial {
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      margin: 3rem 0;
+      position: relative;
+    }
+    .testimonial::before {
+      content: '"';
+      position: absolute; top: -10px; left: 20px;
+      font-size: 4rem; color: #667eea; font-weight: bold;
+    }
+    html[dir="rtl"] .testimonial::before{ left:auto; right:20px; }
+    .testimonial p { font-style: italic; font-size: 1.1rem; line-height: 1.8; margin-bottom: 1rem; }
+    .testimonial-author { font-weight: 700; color: #667eea; }
+
+    /* Footer */
+    .footer { background: var(--footer); color: white; padding: 4rem 5% 2rem; }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1.2fr;
+      gap: 3rem;
+      align-items: start;
+      text-align: left;
+    }
+    html[dir="rtl"] .footer-content{ text-align: right; }
+
+    .footer-section h3 { margin-bottom: 1.2rem; color: var(--cta-start); font-size: 1.2rem; }
+    .footer-section p { line-height: 1.6; margin-bottom: 1rem; color: #ccc; }
+
+    .footer-logo { display: flex; align-items: center; gap: 15px; margin-bottom: 2rem; }
+    .footer-logo img { height: 50px; width: auto; }
+    .footer-logo span { font-size: 1.3rem; font-weight: 800; color: white; }
+
+    /* Address block */
+    .footer-address { margin-top: 1rem; }
+    .addr-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0.35rem 0;
+      color: #ccc;
+    }
+    html[dir="rtl"] .addr-line{ flex-direction: row-reverse; }
+    .addr-icon {
+      display: inline-flex;
+      width: 28px; height: 28px;
+      align-items: center; justify-content: center;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      line-height: 1;
+      flex: 0 0 28px;
+    }
+    .footer-address a { color: #ccc; text-decoration: none; }
+    .footer-address a:hover { color: var(--cta-start); }
+
+    /* Map card */
+    .map-card {
+      margin-top: 1rem;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.04);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      aspect-ratio: 16 / 9;
+    }
+    .map-card iframe { width: 100%; height: 100%; border: 0; }
+
+    /* Footer form */
+    .footer .contact-form {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      height: fit-content;
+    }
+    .footer .contact-form h3 { color: white; }
+    .footer .form-group { margin-bottom: 1.2rem; }
+    .footer .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 700; color: #ddd; }
+    .footer .form-group input,
+    .footer .form-group textarea,
+    .footer .form-group select {
+      width: 100%;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+      font-family: inherit;
+      color: white;
+    }
+    .footer .form-group textarea { min-height: 120px; resize: vertical; }
+    .footer .form-group input::placeholder,
+    .footer .form-group textarea::placeholder { color: rgba(255, 255, 255, 0.6); }
+    .footer .form-group input:focus,
+    .footer .form-group textarea:focus,
+    .footer .form-group select:focus { outline: none; border-color: var(--cta-start); }
+
+    .submit-btn {
+      background: linear-gradient(135deg, var(--cta-start) 0%, var(--cta-end) 100%);
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(74, 158, 255, 0.3); }
+    .submit-btn[disabled] { opacity: 0.7; cursor: not-allowed; }
+
+    /* Alerts */
+    .form-alert {
+      display: none;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
+      border: 1px solid rgba(74, 158, 255, 0.35);
+      background: rgba(74, 158, 255, 0.12);
+      color: #e7f0ff;
+    }
+    .form-alert.show { display: block; }
+
+    .error-text {
+      display: none;
+      font-size: 0.85rem;
+      margin-top: 0.4rem;
+      color: #ffb3b3;
+    }
+    .error-text.active { display: block; }
+    .input-error { border-color: #ef4444 !important; }
+
+    .footer-bottom {
+      grid-column: 1 / -1;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #555;
+      text-align: center;
+      color: #999;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: 2.5rem; }
+      .hero p { font-size: 1.1rem; }
+      .about-content { grid-template-columns: 1fr; gap: 2rem; }
+      .section { padding: 4rem 5%; }
+      .footer-content { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+      html[dir="rtl"] .footer-content{ text-align: center; }
+      .footer .contact-form { text-align: left; }
+      html[dir="rtl"] .footer .contact-form{ text-align: right; }
+      .addr-line { justify-content: center; }
+      .map-card { aspect-ratio: 4 / 3; }
+    }
+
+    /* Scroll animations */
+    .fade-in { opacity: 0; transform: translateY(50px); transition: all 0.8s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav">
+      <div class="logo">
+        <img src="logo.png" alt="ASF Logo"/>
+      </div>
+
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="#home" data-i18n="navHome">Home</a></li>
+          <li><a href="#services" data-i18n="navServices">Services</a></li>
+          <li><a href="#about" data-i18n="navAbout">About</a></li>
+          <li><a href="#testimonials" data-i18n="navTestimonials">Testimonials</a></li>
+          <li><a href="#contact" data-i18n="navContact">Contact</a></li>
+        </ul>
+
+        <div class="lang-toggle" aria-label="Language switch">
+          <button class="lang-btn active" id="btnEn" data-lang="en" aria-pressed="true">EN</button>
+          <button class="lang-btn" id="btnAr" data-lang="ar" aria-pressed="false">AR</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1 data-i18n="heroTitle">Elevating Academic Excellence</h1>
+      <p data-i18n="heroSubtitle">Empowering universities and academic institutions to achieve global recognition through strategic consulting, journal indexing, and professional services.</p>
+      <a href="#services" class="cta-button" data-i18n="heroCta">Discover Our Services</a>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="section">
+    <h2 class="section-title fade-in" data-i18n="servicesTitle">Our Services</h2>
+    <p class="fade-in" style="text-align: center; font-size: 1.2rem; color: #666; max-width: 800px; margin: 0 auto 3rem;" data-i18n="servicesIntro">
+      Academia Smart Firm provides a distinct array of services tailored for universities and academic journals, serving the MENA region with expert care.
+    </p>
+
+    <div class="services-grid">
+      <div class="service-card fade-in">
+        <div class="service-icon">🎯</div>
+        <h3 data-i18n="service1Title">University Ranking Enhancement</h3>
+        <p data-i18n="service1Desc">Strategic consulting to improve your institution's position in global ranking systems like THE, QS, and ARWU through data driven approaches and targeted improvements.</p>
+      </div>
+
+      <div class="service-card fade-in">
+        <div class="service-icon">📚</div>
+        <h3 data-i18n="service2Title">Journal Indexing Services</h3>
+        <p data-i18n="service2Desc">Professional support for indexing academic journals in prestigious databases including Web of Science, Scopus, and regional indexes for Arabic publications.</p>
+      </div>
+
+      <div class="service-card fade-in">
+        <div class="service-icon">🌍</div>
+        <h3 data-i18n="service3Title">Translation and Proofreading</h3>
+        <p data-i18n="service3Desc">Expert linguistic services supporting both Arabic and English publications, ensuring the highest academic and linguistic standards for your research output.</p>
+      </div>
+
+      <div class="service-card fade-in">
+        <div class="service-icon">📈</div>
+        <h3 data-i18n="service4Title">Research Consulting</h3>
+        <p data-i18n="service4Desc">Comprehensive guidance on research strategy, academic visibility enhancement, and international collaboration development to amplify your global presence.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact -->
+  <section class="stats">
+    <h2 class="section-title" data-i18n="statsTitle">Our Impact</h2>
+    <div class="stats-grid">
+      <div class="stat-item"><h3>250+</h3><p data-i18n="stat1Label">Journals Indexed</p></div>
+      <div class="stat-item"><h3>6+</h3><p data-i18n="stat2Label">Years Experience</p></div>
+      <div class="stat-item"><h3>50+</h3><p data-i18n="stat3Label">Universities Served</p></div>
+      <div class="stat-item"><h3>15+</h3><p data-i18n="stat4Label">Countries Reached</p></div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section about">
+    <h2 class="section-title fade-in" data-i18n="aboutTitle">About Academia Smart Firm</h2>
+    <div class="about-content">
+      <div class="about-text fade-in">
+        <p data-i18n="aboutP1">
+          Academia Smart Firm is a leading consulting firm dedicated to serving universities and research institutes across the MENA region.
+        </p>
+        <p data-i18n="aboutP2">
+          Our mission is to empower academic entities to achieve their aspirations and amplify their global presence through strategic guidance and professional services.
+        </p>
+
+        <ul class="expertise-list">
+          <li data-i18n="exp1">Strategic university ranking improvement</li>
+          <li data-i18n="exp2">Global database journal indexing</li>
+          <li data-i18n="exp3">Professional translation and proofreading</li>
+          <li data-i18n="exp4">Academic reputation enhancement</li>
+          <li data-i18n="exp5">International collaboration facilitation</li>
+        </ul>
+      </div>
+
+      <div class="fade-in">
+        <div style="background: linear-gradient(135deg, var(--cta-start) 0%, var(--cta-end) 100%); padding: 2rem; border-radius: 20px; color: white;">
+          <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;" data-i18n="whyTitle">Why Choose ASF?</h3>
+
+          <div style="display: grid; gap: 1.5rem; margin-bottom: 2rem;">
+            <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 12px;">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;">
+                <div style="background: rgba(255,255,255,0.3); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🎯</div>
+                <strong style="font-size: 1.1rem;" data-i18n="why1Title">Proven Track Record</strong>
+              </div>
+              <p style="margin: 0; line-height: 1.5; opacity: 0.95;" data-i18n="why1Text">Over six years of experience with more than two hundred and fifty journals successfully indexed in global databases including Web of Science and Scopus.</p>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 12px;">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;">
+                <div style="background: rgba(255,255,255,0.3); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🌍</div>
+                <strong style="font-size: 1.1rem;" data-i18n="why2Title">MENA Region Expertise</strong>
+              </div>
+              <p style="margin: 0; line-height: 1.5; opacity: 0.95;" data-i18n="why2Text">Deep understanding of the academic landscape across the Middle East and North Africa with bilingual capabilities.</p>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 12px;">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;">
+                <div style="background: rgba(255,255,255,0.3); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">⚡</div>
+                <strong style="font-size: 1.1rem;" data-i18n="why3Title">Rapid Results</strong>
+              </div>
+              <p style="margin: 0; line-height: 1.5; opacity: 0.95;" data-i18n="why3Text">Focused work on key indicators delivers measurable gains within twelve months.</p>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 12px;">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;">
+                <div style="background: rgba(255,255,255,0.3); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">👥</div>
+                <strong style="font-size: 1.1rem;" data-i18n="why4Title">Dedicated Team</strong>
+              </div>
+              <p style="margin: 0; line-height: 1.5; opacity: 0.95;" data-i18n="why4Text">A team of consultants linguists and researchers committed to your success.</p>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 12px;">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;">
+                <div style="background: rgba(255,255,255,0.3); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🔄</div>
+                <strong style="font-size: 1.1rem;" data-i18n="why5Title">Comprehensive Support</strong>
+              </div>
+              <p style="margin: 0; line-height: 1.5; opacity: 0.95;" data-i18n="why5Text">End to end services from discovery to implementation with ongoing guidance.</p>
+            </div>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.2); padding: 1.5rem; border-radius: 12px; text-align: center;">
+            <strong style="display: block; font-size: 1.2rem; margin-bottom: 0.5rem;" data-i18n="ctaBlockTitle">Ready to Transform Your Institution?</strong>
+            <p style="margin: 0; opacity: 0.9;" data-i18n="ctaBlockText">Join leading universities across the region who trust our team on their excellence journey.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="section">
+    <h2 class="section-title fade-in" data-i18n="testimonialsTitle">What Our Clients Say</h2>
+    <div class="testimonial fade-in">
+      <p data-i18n="testimonialText">
+        Partnering with our firm boosted our Times Higher Education standing in a single year through targeted work on reputation and citations. We also saw more international collaborations and research funding.
+      </p>
+      <div class="testimonial-author" data-i18n="testimonialAuthor">Dean of Research Major Saudi Arabian University</div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact" class="footer">
+    <div class="footer-content">
+      <!-- Left column -->
+      <div class="footer-left">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <img src="logo.png" alt="ASF Logo"/>
+            <span>Academia Smart Firm</span>
+          </div>
+          <p data-i18n="footerAbout">
+            Empowering universities and academic institutions across the MENA region to achieve global recognition through strategic consulting and professional services.
+          </p>
+          <p style="margin-top: 1rem;">
+            <strong data-i18n="footerServingTitle">Serving the MENA Region</strong><br/>
+            <span data-i18n="footerServingText">Specialized expertise in both Arabic and English academic publications.</span>
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3 data-i18n="contactInfoTitle">Contact Information</h3>
+
+          <address class="footer-address" itemscope itemtype="https://schema.org/PostalAddress">
+            <p class="addr-line">
+              <span class="addr-icon" aria-hidden="true">📍</span>
+              <span itemprop="streetAddress" data-i18n="addr1">The Meydan Grandstand</span>
+            </p>
+            <p class="addr-line">
+              <span class="addr-icon" aria-hidden="true">🏢</span>
+              <span itemprop="streetAddress" data-i18n="addr2">Sixth Floor Meydan Road</span>
+            </p>
+            <p class="addr-line">
+              <span class="addr-icon" aria-hidden="true">🌆</span>
+              <span itemprop="addressLocality" data-i18n="addr3">Nad Al Sheba Dubai UAE</span>
+            </p>
+            <p class="addr-line">
+              <span class="addr-icon" aria-hidden="true">✉️</span>
+              <a href="mailto:info@academiasmartfirm.com" itemprop="email">info@academiasmartfirm.com</a>
+            </p>
+            <p class="addr-line">
+              <span class="addr-icon" aria-hidden="true">🆔</span>
+              <span data-i18n="regLabel">Registration Number</span>:
+              <strong data-i18n="regNum">2415501</strong>
+            </p>
+          </address>
+
+          <div class="map-card" aria-label="Map to our address">
+            <iframe
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=The%20Meydan%20Hotel%20Grandstand%206th%20Floor%20Meydan%20Road%20Nad%20Al%20Sheba%20Dubai%20UAE&output=embed"
+              title="Location map for Academia Smart Firm"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column: form -->
+      <div class="contact-form">
+        <h3 data-i18n="formTitle">Get In Touch</h3>
+        <div id="formAlert" class="form-alert" role="status" aria-live="polite"></div>
+
+        <form id="contactForm" novalidate>
+          <div class="form-group">
+            <label for="name" data-i18n="labelName">Full Name *</label>
+            <input type="text" id="name" name="name" required aria-label="Full Name" />
+            <div class="error-text" id="err-name" data-i18n="errName">Please enter your full name.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" data-i18n="labelEmail">Email Address *</label>
+            <input type="email" id="email" name="email" required aria-label="Email Address" />
+            <div class="error-text" id="err-email" data-i18n="errEmail">Please enter a valid email address.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="organization" data-i18n="labelOrg">Organization or Institution</label>
+            <input type="text" id="organization" name="organization" aria-label="Organization or Institution" />
+          </div>
+
+          <div class="form-group">
+            <label for="service" data-i18n="labelService">Service of Interest</label>
+            <select id="service" name="service" aria-label="Service of Interest">
+              <option value="" data-i18n="svcSelect">Select a service...</option>
+              <option value="ranking" data-i18n="svcRanking">University Ranking Enhancement</option>
+              <option value="indexing" data-i18n="svcIndexing">Journal Indexing Services</option>
+              <option value="translation" data-i18n="svcTranslation">Translation and Proofreading</option>
+              <option value="consulting" data-i18n="svcConsulting">Research Consulting</option>
+              <option value="other" data-i18n="svcOther">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message" data-i18n="labelMessage">Message *</label>
+            <textarea id="message" name="message" required aria-label="Message" data-i18n-placeholder="phMessage" placeholder="Tell us about your requirements..."></textarea>
+            <div class="error-text" id="err-message" data-i18n="errMessage">Please share a short summary of your needs.</div>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn" data-i18n="btnSubmit">Send Message</button>
+        </form>
+      </div>
+
+      <div class="footer-bottom">
+        <p data-i18n="rights">© 2024 Academia Smart Firm. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Language dictionaries
+    const i18n = {
+      en: {
+        navHome: 'Home',
+        navServices: 'Services',
+        navAbout: 'About',
+        navTestimonials: 'Testimonials',
+        navContact: 'Contact',
+        heroTitle: 'Elevating Academic Excellence',
+        heroSubtitle: 'Empowering universities and academic institutions to achieve global recognition through strategic consulting, journal indexing, and professional services.',
+        heroCta: 'Discover Our Services',
+
+        servicesTitle: 'Our Services',
+        servicesIntro: 'Academia Smart Firm provides a distinct array of services tailored for universities and academic journals, serving the MENA region with expert care.',
+        service1Title: 'University Ranking Enhancement',
+        service1Desc: 'Strategic consulting to improve your institution’s position in global ranking systems like THE, QS, and ARWU through data driven approaches and targeted improvements.',
+        service2Title: 'Journal Indexing Services',
+        service2Desc: 'Professional support for indexing academic journals in prestigious databases including Web of Science, Scopus, and regional indexes for Arabic publications.',
+        service3Title: 'Translation and Proofreading',
+        service3Desc: 'Expert linguistic services supporting both Arabic and English publications, ensuring the highest academic and linguistic standards for your research output.',
+        service4Title: 'Research Consulting',
+        service4Desc: 'Comprehensive guidance on research strategy, academic visibility enhancement, and international collaboration development to amplify your global presence.',
+
+        statsTitle: 'Our Impact',
+        stat1Label: 'Journals Indexed',
+        stat2Label: 'Years Experience',
+        stat3Label: 'Universities Served',
+        stat4Label: 'Countries Reached',
+
+        aboutTitle: 'About Academia Smart Firm',
+        aboutP1: 'Academia Smart Firm is a leading consulting firm dedicated to serving universities and research institutes across the MENA region.',
+        aboutP2: 'Our mission is to empower academic entities to achieve their aspirations and amplify their global presence through strategic guidance and professional services.',
+        exp1: 'Strategic university ranking improvement',
+        exp2: 'Global database journal indexing',
+        exp3: 'Professional translation and proofreading',
+        exp4: 'Academic reputation enhancement',
+        exp5: 'International collaboration facilitation',
+
+        whyTitle: 'Why Choose ASF?',
+        why1Title: 'Proven Track Record',
+        why1Text: 'Over six years of experience with more than two hundred and fifty journals successfully indexed in global databases including Web of Science and Scopus.',
+        why2Title: 'MENA Region Expertise',
+        why2Text: 'Deep understanding of the academic landscape across the Middle East and North Africa with bilingual capabilities.',
+        why3Title: 'Rapid Results',
+        why3Text: 'Focused work on key indicators delivers measurable gains within twelve months.',
+        why4Title: 'Dedicated Team',
+        why4Text: 'A team of consultants linguists and researchers committed to your success.',
+        why5Title: 'Comprehensive Support',
+        why5Text: 'End to end services from discovery to implementation with ongoing guidance.',
+        ctaBlockTitle: 'Ready to Transform Your Institution?',
+        ctaBlockText: 'Join leading universities across the region who trust our team on their excellence journey.',
+
+        testimonialsTitle: 'What Our Clients Say',
+        testimonialText: 'Partnering with our firm boosted our Times Higher Education standing in a single year through targeted work on reputation and citations. We also saw more international collaborations and research funding.',
+        testimonialAuthor: 'Dean of Research Major Saudi Arabian University',
+
+        footerAbout: 'Empowering universities and academic institutions across the MENA region to achieve global recognition through strategic consulting and professional services.',
+        footerServingTitle: 'Serving the MENA Region',
+        footerServingText: 'Specialized expertise in both Arabic and English academic publications.',
+        contactInfoTitle: 'Contact Information',
+        addr1: 'The Meydan Grandstand',
+        addr2: 'Sixth Floor Meydan Road',
+        addr3: 'Nad Al Sheba Dubai UAE',
+        regLabel: 'Registration Number',
+        regNum: '2415501',
+
+        formTitle: 'Get In Touch',
+        labelName: 'Full Name *',
+        labelEmail: 'Email Address *',
+        labelOrg: 'Organization or Institution',
+        labelService: 'Service of Interest',
+        svcSelect: 'Select a service...',
+        svcRanking: 'University Ranking Enhancement',
+        svcIndexing: 'Journal Indexing Services',
+        svcTranslation: 'Translation and Proofreading',
+        svcConsulting: 'Research Consulting',
+        svcOther: 'Other',
+        labelMessage: 'Message *',
+        phMessage: 'Tell us about your requirements...',
+        btnSubmit: 'Send Message',
+
+        errName: 'Please enter your full name.',
+        errEmail: 'Please enter a valid email address.',
+        errMessage: 'Please share a short summary of your needs.',
+        formIncomplete: 'Please complete the highlighted fields.',
+        formThanks: 'Thank you. Your email app will open now. If it does not, please email us at info@academiasmartfirm.com',
+
+        rights: '© 2024 Academia Smart Firm. All rights reserved.'
+      },
+
+      ar: {
+        navHome: 'الرئيسية',
+        navServices: 'الخدمات',
+        navAbout: 'من نحن',
+        navTestimonials: 'آراء العملاء',
+        navContact: 'تواصل معنا',
+        heroTitle: 'الارتقاء بالتميز الأكاديمي',
+        heroSubtitle: 'نمكن الجامعات والمؤسسات الأكاديمية من تحقيق حضور عالمي عبر الاستشارات الاستراتيجية وفهرسة المجلات والخدمات المهنية.',
+        heroCta: 'استكشف خدماتنا',
+
+        servicesTitle: 'خدماتنا',
+        servicesIntro: 'تقدم أكاديميا سمارت فيرم مجموعة مميزة من الخدمات المصممة للجامعات والمجلات الأكاديمية مع تركيز خاص على منطقة الشرق الأوسط وشمال أفريقيا.',
+        service1Title: 'تعزيز تصنيفات الجامعات',
+        service1Desc: 'استشارات استراتيجية لتحسين موقع المؤسسة في أنظمة التصنيف العالمية مثل تايمز للتعليم العالي وكيو اس وشنغهاي بالاعتماد على البيانات والتحسينات المستهدفة.',
+        service2Title: 'خدمات فهرسة المجلات',
+        service2Desc: 'دعم مهني لفهرسة المجلات الأكاديمية في قواعد البيانات المرموقة بما فيها ويب اوف ساينس وسكوبس إضافة إلى الفهارس الإقليمية.',
+        service3Title: 'الترجمة والمراجعة اللغوية',
+        service3Desc: 'خدمات لغوية احترافية تدعم النشر العربي والإنجليزي مع الالتزام بأعلى المعايير الأكاديمية واللغوية.',
+        service4Title: 'استشارات البحث العلمي',
+        service4Desc: 'إرشاد شامل في استراتيجية البحث وتعزيز الظهور الأكاديمي وتطوير التعاون الدولي لرفع الحضور العالمي.',
+
+        statsTitle: 'أثرنا',
+        stat1Label: 'مجلات مفهرسة',
+        stat2Label: 'سنوات خبرة',
+        stat3Label: 'جامعات مخدومة',
+        stat4Label: 'دول وصلنا إليها',
+
+        aboutTitle: 'من نحن',
+        aboutP1: 'أكاديميا سمارت فيرم شركة استشارية رائدة تخدم الجامعات ومعاهد البحث في الشرق الأوسط وشمال أفريقيا.',
+        aboutP2: 'رسالتنا تمكين الجهات الأكاديمية من تحقيق طموحاتها وتعزيز حضورها العالمي عبر التوجيه الاستراتيجي والخدمات المهنية.',
+        exp1: 'تحسين التصنيف الجامعي',
+        exp2: 'فهرسة المجلات في قواعد عالمية',
+        exp3: 'ترجمة ومراجعة لغوية',
+        exp4: 'تعزيز السمعة الأكاديمية',
+        exp5: 'تيسير التعاون الدولي',
+
+        whyTitle: 'لماذا تختار أكاديميا سمارت فيرم؟',
+        why1Title: 'سجل مثبت',
+        why1Text: 'أكثر من ست سنوات خبرة مع فهرسة ما يزيد على مئتين وخمسين مجلة في قواعد عالمية تشمل ويب اوف ساينس وسكوبس.',
+        why2Title: 'خبرة عميقة في المنطقة',
+        why2Text: 'فهم متقدم للمشهد الأكاديمي في الشرق الأوسط وشمال أفريقيا مع قدرة ثنائية اللغة.',
+        why3Title: 'نتائج سريعة',
+        why3Text: 'التركيز على المؤشرات الأساسية يحقق تحسنا ملموسا خلال اثني عشر شهرا.',
+        why4Title: 'فريق مكرس',
+        why4Text: 'فريق من المستشارين واللغويين والباحثين يعمل لنجاح مؤسستك.',
+        why5Title: 'دعم شامل',
+        why5Text: 'خدمات من البداية حتى التنفيذ مع إرشاد مستمر.',
+        ctaBlockTitle: 'جاهزون لرفع أداء مؤسستك؟',
+        ctaBlockText: 'انضم إلى جامعات رائدة في المنطقة تثق بفريقنا في رحلة التميز.',
+
+        testimonialsTitle: 'آراء عملائنا',
+        testimonialText: 'التعاون معنا رفع ترتيبنا في تصنيف تايمز للتعليم العالي خلال عام واحد بفضل عمل مركز على السمعة والاستشهادات كما شهدنا زيادة في التعاون الدولي وتمويل البحث.',
+        testimonialAuthor: 'عميد البحث العلمي جامعة كبرى في السعودية',
+
+        footerAbout: 'نمكن الجامعات والمؤسسات الأكاديمية في المنطقة من تحقيق حضور عالمي عبر الاستشارات والخدمات المهنية.',
+        footerServingTitle: 'نخدم الشرق الأوسط وشمال أفريقيا',
+        footerServingText: 'خبرة متخصصة في النشر الأكاديمي بالعربية والإنجليزية.',
+        contactInfoTitle: 'معلومات التواصل',
+        addr1: 'فندق الميدان مبنى المدرج',
+        addr2: 'الطابق السادس شارع الميدان',
+        addr3: 'ند الشبا دبي الإمارات العربية المتحدة',
+        regLabel: 'رقم التسجيل',
+        regNum: '2415501',
+
+        formTitle: 'تواصل معنا',
+        labelName: 'الاسم الكامل *',
+        labelEmail: 'البريد الإلكتروني *',
+        labelOrg: 'الجهة أو المؤسسة',
+        labelService: 'الخدمة المطلوبة',
+        svcSelect: 'اختر خدمة',
+        svcRanking: 'تعزيز تصنيفات الجامعات',
+        svcIndexing: 'فهرسة المجلات',
+        svcTranslation: 'الترجمة والمراجعة',
+        svcConsulting: 'استشارات البحث العلمي',
+        svcOther: 'أخرى',
+        labelMessage: 'الرسالة *',
+        phMessage: 'حدثنا عن متطلباتك',
+        btnSubmit: 'إرسال الرسالة',
+
+        errName: 'يرجى إدخال الاسم الكامل.',
+        errEmail: 'يرجى إدخال بريد صحيح.',
+        errMessage: 'يرجى كتابة ملخص قصير لاحتياجاتك.',
+        formIncomplete: 'يرجى استكمال الحقول المظللة.',
+        formThanks: 'شكرا لك سوف يفتح تطبيق البريد الآن وإن لم يفتح يرجى مراسلتنا على info@academiasmartfirm.com',
+
+        rights: 'جميع الحقوق محفوظة 2024 أكاديميا سمارت فيرم'
+      }
+    };
+
+    // Helper to apply language
+    function applyLang(lang){
+      const dict = i18n[lang];
+      // Update text nodes
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if(dict[key] !== undefined){
+          el.textContent = dict[key];
+        }
+      });
+      // Placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if(dict[key] !== undefined){
+          el.setAttribute('placeholder', dict[key]);
+        }
+      });
+      // Direction and lang
+      document.documentElement.setAttribute('lang', lang === 'ar' ? 'ar' : 'en');
+      document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+
+      // Toggle button state
+      document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+      document.getElementById('btnAr').classList.toggle('active', lang === 'ar');
+      document.getElementById('btnEn').setAttribute('aria-pressed', String(lang === 'en'));
+      document.getElementById('btnAr').setAttribute('aria-pressed', String(lang === 'ar'));
+    }
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Fade in on scroll
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, observerOptions);
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Header effect
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('.header');
+      if (window.scrollY > 100) {
+        header.style.background = 'rgba(255, 255, 255, 0.98)';
+        header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+      } else {
+        header.style.background = 'rgba(255, 255, 255, 0.95)';
+        header.style.boxShadow = 'none';
+      }
+    });
+
+    // Language switch events
+    document.getElementById('btnEn').addEventListener('click', () => applyLang('en'));
+    document.getElementById('btnAr').addEventListener('click', () => applyLang('ar'));
+
+    // Form behavior
+    const byId = id => document.getElementById(id);
+    const emailOK = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+    const form = byId('contactForm');
+    const alertBox = byId('formAlert');
+    const submitBtn = byId('submitBtn');
+
+    function setError(input, msgId, show) {
+      const msgEl = byId(msgId);
+      if (show) {
+        input.classList.add('input-error');
+        msgEl.classList.add('active');
+      } else {
+        input.classList.remove('input-error');
+        msgEl.classList.remove('active');
+      }
+    }
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const name = byId('name');
+      const email = byId('email');
+      const org = byId('organization');
+      const service = byId('service');
+      const message = byId('message');
+
+      let valid = true;
+
+      if (!name.value.trim()) { setError(name, 'err-name', true); valid = false; } else { setError(name, 'err-name', false); }
+      if (!emailOK(email.value.trim())) { setError(email, 'err-email', true); valid = false; } else { setError(email, 'err-email', false); }
+      if (!message.value.trim()) { setError(message, 'err-message', true); valid = false; } else { setError(message, 'err-message', false); }
+
+      // Current language
+      const lang = document.documentElement.getAttribute('lang') === 'ar' ? 'ar' : 'en';
+      const dict = i18n[lang];
+
+      if (!valid) {
+        alertBox.textContent = dict.formIncomplete;
+        alertBox.classList.add('show');
+        return;
+      }
+
+      const emailBody =
+        `Name: ${encodeURIComponent(name.value.trim())}%0D%0A` +
+        `Email: ${encodeURIComponent(email.value.trim())}%0D%0A` +
+        `Organization: ${encodeURIComponent(org.value.trim() || (lang === 'ar' ? 'غير محدد' : 'Not specified'))}%0D%0A` +
+        `Service of Interest: ${encodeURIComponent(service.value || (lang === 'ar' ? 'غير محدد' : 'Not specified'))}%0D%0A%0D%0A` +
+        `Message:%0D%0A${encodeURIComponent(message.value.trim())}`;
+
+      const subjectBase = lang === 'ar' ? 'رسالة من نموذج التواصل' : 'Contact Form Submission';
+      const mailtoLink = `mailto:info@academiasmartfirm.com?subject=${encodeURIComponent(subjectBase)}&body=${emailBody}`;
+
+      submitBtn.setAttribute('disabled', 'true');
+      alertBox.textContent = dict.formThanks;
+      alertBox.classList.add('show');
+
+      window.location.href = mailtoLink;
+
+      setTimeout(() => {
+        submitBtn.removeAttribute('disabled');
+        form.reset();
+      }, 800);
+    });
+
+    ['name','email','message'].forEach(id => {
+      byId(id).addEventListener('input', () => {
+        alertBox.classList.remove('show');
+      });
+    });
+
+    // Initialize default language
+    applyLang('en');
+  </script>
+</body>
+</html>
