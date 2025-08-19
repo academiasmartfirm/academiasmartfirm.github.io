@@ -4,19 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Academia Smart Firm | Elevating Academic Excellence</title>
+
+  <!-- Brand meta for mobile UI tint -->
+  <meta name="theme-color" content="#42A5FF"/>
+
+  <!-- Favicon area -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
   <!-- Optional fonts for better Arabic and English rendering -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root{
-      --brand-start:#667eea;
-      --brand-end:#764ba2;
-      --cta-start:#4A9EFF;
-      --cta-end:#2563EB;
-      --ink:#333;
-      --ink-sub:#666;
-      --footer:#333;
+      /* Sky Dancer brand family */
+      --brand-start:#42A5FF;  /* base */
+      --brand-end:#1E88E5;    /* deeper */
+      --brand-deep:#0B6CD4;   /* deepest */
+      --brand-soft:#E8F4FF;   /* light surface */
+
+      /* CTAs use the same family */
+      --cta-start:#42A5FF;
+      --cta-end:#1E88E5;
+
+      /* Ink and surfaces */
+      --ink:#1f2937;
+      --ink-sub:#4b5563;
+      --footer:#0b1b2b;
     }
 
     body {
@@ -79,7 +96,7 @@
       position: relative;
     }
 
-    .nav-links a:hover { color: #667eea; }
+    .nav-links a:hover { color: var(--brand-start); }
 
     .nav-links a::after {
       content: '';
@@ -153,7 +170,7 @@
       opacity: 0;
       animation: slideUp 1s ease 0.9s forwards;
     }
-    .cta-button:hover { background: white; color: #667eea; transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+    .cta-button:hover { background: white; color: var(--brand-end); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(11, 108, 212, 0.3); }
 
     @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -181,11 +198,11 @@
       background: white;
       padding: 2rem;
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       transition: all 0.3s ease;
       border: 1px solid rgba(0, 0, 0, 0.05);
     }
-    .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2); }
+    .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(66, 165, 255, 0.22); }
     .service-icon {
       width: 60px; height: 60px;
       background: linear-gradient(135deg, var(--brand-start) 0%, var(--brand-end) 100%);
@@ -198,7 +215,7 @@
 
     /* Our Impact */
     .stats {
-      background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+      background: linear-gradient(135deg, var(--brand-end) 0%, var(--brand-deep) 100%);
       color: white;
       text-align: center;
       padding: 4rem 5%;
@@ -220,10 +237,10 @@
     }
     .stat-item h3 { font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem; }
     .stat-item p { font-size: 1.1rem; opacity: 0.95; }
-    html[dir="rtl"] .stat-item h3{ direction: ltr; } /* keep numerals readable */
+    html[dir="rtl"] .stat-item h3{ direction: ltr; }
 
     /* About */
-    .about { background: #f8fafc; }
+    .about { background: var(--brand-soft); }
     .about-content {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -233,7 +250,7 @@
     .about-text p { font-size: 1.1rem; color: var(--ink-sub); margin-bottom: 1.5rem; line-height: 1.8; }
     .expertise-list { list-style: none; margin-top: 2rem; }
     .expertise-list li { padding: 0.5rem 0; color: #555; position: relative; padding-left: 2rem; }
-    .expertise-list li::before { content: '✓'; position: absolute; left: 0; color: #667eea; font-weight: bold; }
+    .expertise-list li::before { content: '✓'; position: absolute; left: 0; color: var(--brand-start); font-weight: bold; }
     html[dir="rtl"] .expertise-list li{ padding-left: 0; padding-right: 2rem; }
     html[dir="rtl"] .expertise-list li::before{ left: auto; right: 0; }
 
@@ -249,11 +266,38 @@
     .testimonial::before {
       content: '"';
       position: absolute; top: -10px; left: 20px;
-      font-size: 4rem; color: #667eea; font-weight: bold;
+      font-size: 4rem; color: var(--brand-start); font-weight: bold;
     }
     html[dir="rtl"] .testimonial::before{ left:auto; right:20px; }
     .testimonial p { font-style: italic; font-size: 1.1rem; line-height: 1.8; margin-bottom: 1rem; }
-    .testimonial-author { font-weight: 700; color: #667eea; }
+    .testimonial-author { font-weight: 700; color: var(--brand-end); }
+
+    /* Testimonial slider */
+.ts { position: relative; max-width: 900px; margin: 0 auto; }
+.ts-viewport { overflow: hidden; border-radius: 20px; }
+.ts-track { display: flex; transition: transform 0.5s ease; }
+.ts-slide { min-width: 100%; }
+
+.ts-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px; border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(255,255,255,0.9);
+  cursor: pointer; font-size: 1.4rem; line-height: 1;
+  display: grid; place-items: center;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+.ts-prev { left: 6px; }
+.ts-next { right: 6px; }
+.ts-btn:hover { background: #fff; box-shadow: 0 10px 24px rgba(66,165,255,0.20); border-color: rgba(66,165,255,0.35); }
+
+.ts-dots { display: flex; justify-content: center; gap: 8px; margin-top: 1rem; }
+.ts-dot {
+  width: 10px; height: 10px; border-radius: 999px;
+  border: 0; cursor: pointer; background: rgba(0,0,0,0.2);
+}
+.ts-dot.active { background: var(--brand-end); width: 28px; }
+
 
     /* Footer */
     .footer { background: var(--footer); color: white; padding: 4rem 5% 2rem; }
@@ -270,7 +314,7 @@
     html[dir="rtl"] .footer-content{ text-align: right; }
 
     .footer-section h3 { margin-bottom: 1.2rem; color: var(--cta-start); font-size: 1.2rem; }
-    .footer-section p { line-height: 1.6; margin-bottom: 1rem; color: #ccc; }
+    .footer-section p { line-height: 1.6; margin-bottom: 1rem; color: #ccd6e0; }
 
     .footer-logo { display: flex; align-items: center; gap: 15px; margin-bottom: 2rem; }
     .footer-logo img { height: 50px; width: auto; }
@@ -283,7 +327,7 @@
       align-items: center;
       gap: 10px;
       margin: 0.35rem 0;
-      color: #ccc;
+      color: #ccd6e0;
     }
     html[dir="rtl"] .addr-line{ flex-direction: row-reverse; }
     .addr-icon {
@@ -297,7 +341,7 @@
       line-height: 1;
       flex: 0 0 28px;
     }
-    .footer-address a { color: #ccc; text-decoration: none; }
+    .footer-address a { color: #ccd6e0; text-decoration: none; }
     .footer-address a:hover { color: var(--cta-start); }
 
     /* Map card */
@@ -324,7 +368,7 @@
     }
     .footer .contact-form h3 { color: white; }
     .footer .form-group { margin-bottom: 1.2rem; }
-    .footer .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 700; color: #ddd; }
+    .footer .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 700; color: #dde7f0; }
     .footer .form-group input,
     .footer .form-group textarea,
     .footer .form-group select {
@@ -357,7 +401,7 @@
       transition: all 0.3s ease;
       width: 100%;
     }
-    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(74, 158, 255, 0.3); }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(66, 165, 255, 0.3); }
     .submit-btn[disabled] { opacity: 0.7; cursor: not-allowed; }
 
     /* Alerts */
@@ -366,8 +410,8 @@
       margin-bottom: 1rem;
       border-radius: 10px;
       padding: 0.9rem 1rem;
-      border: 1px solid rgba(74, 158, 255, 0.35);
-      background: rgba(74, 158, 255, 0.12);
+      border: 1px solid rgba(66, 165, 255, 0.35);
+      background: rgba(66, 165, 255, 0.12);
       color: #e7f0ff;
     }
     .form-alert.show { display: block; }
@@ -385,9 +429,9 @@
       grid-column: 1 / -1;
       margin-top: 3rem;
       padding-top: 2rem;
-      border-top: 1px solid #555;
+      border-top: 1px solid #365670;
       text-align: center;
-      color: #999;
+      color: #9db5c7;
     }
 
     /* Responsive */
@@ -405,6 +449,23 @@
       .map-card { aspect-ratio: 4 / 3; }
     }
 
+    /* RTL footer address alignment */
+html[dir="rtl"] .footer-address { 
+  text-align: right;
+}
+
+html[dir="rtl"] .addr-line {
+  width: 100%;
+  flex-direction: row;          /* keep icon then text */
+  justify-content: flex-end;    /* move the row to the right */
+}
+
+html[dir="rtl"] .addr-icon {
+  margin-inline-end: 10px;      /* space between icon and text */
+  margin-inline-start: 0;
+}
+
+
     /* Scroll animations */
     .fade-in { opacity: 0; transform: translateY(50px); transition: all 0.8s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
@@ -415,7 +476,9 @@
   <header class="header">
     <nav class="nav">
       <div class="logo">
-        <img src="logo.png" alt="ASF Logo"/>
+        <a href="#home" aria-label="Back to top">
+          <img src="logo.png" alt="ASF Logo"/>
+        </a>
       </div>
 
       <div class="nav-right">
@@ -565,7 +628,7 @@
     </div>
   </section>
 
-  <!-- Testimonials -->
+  <!-- Testimonials 
   <section id="testimonials" class="section">
     <h2 class="section-title fade-in" data-i18n="testimonialsTitle">What Our Clients Say</h2>
     <div class="testimonial fade-in">
@@ -575,6 +638,83 @@
       <div class="testimonial-author" data-i18n="testimonialAuthor">Dean of Research Major Saudi Arabian University</div>
     </div>
   </section>
+-->
+
+  <!-- Testimonials 
+<section id="testimonials" class="section">
+  <h2 class="section-title fade-in" data-i18n="testimonialsTitle">What Our Clients Say</h2>
+
+  <div class="testimonial fade-in">
+    <p data-i18n="testimonial1Text">
+      “Your team guided us through every step of journal indexation. Our editorial policies, peer review workflow, and citation ethics were refined with clear checklists and mentoring. We achieved acceptance in a major database and built a sustainable roadmap for continuous quality.”
+    </p>
+    <div class="testimonial-author" data-i18n="testimonial1Author">
+      Associate Editor at a public university in Qatar
+    </div>
+  </div>
+
+  <div class="testimonial fade-in">
+    <p data-i18n="testimonial2Text">
+      “The workshop series for editors and reviewers was practical and energizing. Sessions on research visibility, submission quality, and ethics raised our standards right away. Turnaround times improved and author satisfaction increased within one semester.”
+    </p>
+    <div class="testimonial-author" data-i18n="testimonial2Author">
+      Journal Coordinator at a higher education institution in Bahrain
+    </div>
+  </div>
+
+  <div class="testimonial fade-in">
+    <p data-i18n="testimonial3Text">
+      “We received focused support on meeting indexation criteria along with campus workshops for department leaders and editorial boards. The mix of audits, coaching, and action plans helped our flagship journal reach the required benchmarks and strengthened our internal capabilities.”
+    </p>
+    <div class="testimonial-author" data-i18n="testimonial3Author">
+      Director of Research at a leading university in Saudi Arabia
+    </div>
+  </div>
+</section>
+-->
+
+  <!-- Testimonials -->
+<section id="testimonials" class="section">
+  <h2 class="section-title fade-in" data-i18n="testimonialsTitle">What Our Clients Say</h2>
+
+  <div class="ts" aria-roledescription="carousel">
+    <button class="ts-btn ts-prev" aria-label="Previous testimonial">‹</button>
+
+    <div class="ts-viewport">
+      <div class="ts-track">
+        <article class="testimonial ts-slide" id="ts-slide-1">
+          <p data-i18n="testimonial1Text">
+            “Your team guided us through every step of journal indexation. Our editorial policies, peer review workflow, and citation ethics were refined with clear checklists and mentoring. We achieved acceptance in a major database and built a sustainable roadmap for continuous quality.”
+          </p>
+          <div class="testimonial-author" data-i18n="testimonial1Author">Associate Editor at a public university in Qatar</div>
+        </article>
+
+        <article class="testimonial ts-slide" id="ts-slide-2">
+          <p data-i18n="testimonial2Text">
+            “The workshop series for editors and reviewers was practical and energizing. Sessions on research visibility, submission quality, and ethics raised our standards right away. Turnaround times improved and author satisfaction increased within one semester.”
+          </p>
+          <div class="testimonial-author" data-i18n="testimonial2Author">Journal Coordinator at a higher education institution in Bahrain</div>
+        </article>
+
+        <article class="testimonial ts-slide" id="ts-slide-3">
+          <p data-i18n="testimonial3Text">
+            “We received focused support on meeting indexation criteria along with campus workshops for department leaders and editorial boards. The mix of audits, coaching, and action plans helped our flagship journal reach the required benchmarks and strengthened our internal capabilities.”
+          </p>
+          <div class="testimonial-author" data-i18n="testimonial3Author">Director of Research at a leading university in Saudi Arabia</div>
+        </article>
+      </div>
+    </div>
+
+    <button class="ts-btn ts-next" aria-label="Next testimonial">›</button>
+
+    <div class="ts-dots" role="tablist" aria-label="Testimonials">
+      <button class="ts-dot active" aria-label="Show slide 1" aria-controls="ts-slide-1" role="tab" aria-selected="true"></button>
+      <button class="ts-dot" aria-label="Show slide 2" aria-controls="ts-slide-2" role="tab" aria-selected="false"></button>
+      <button class="ts-dot" aria-label="Show slide 3" aria-controls="ts-slide-3" role="tab" aria-selected="false"></button>
+    </div>
+  </div>
+</section>
+
 
   <!-- Footer -->
   <footer id="contact" class="footer">
@@ -732,9 +872,19 @@
         ctaBlockText: 'Join leading universities across the region who trust our team on their excellence journey.',
 
         testimonialsTitle: 'What Our Clients Say',
-        testimonialText: 'Partnering with our firm boosted our Times Higher Education standing in a single year through targeted work on reputation and citations. We also saw more international collaborations and research funding.',
-        testimonialAuthor: 'Dean of Research Major Saudi Arabian University',
+        //testimonialText: 'Partnering with our firm boosted our Times Higher Education standing in a single year through targeted work on reputation and citations. We also saw more international collaborations and research funding.',
+        //testimonialAuthor: 'Dean of Research Major Saudi Arabian University',
+        
+        testimonial1Text: '“Your team guided us through every step of journal indexation. Our editorial policies, peer review workflow, and citation ethics were refined with clear checklists and mentoring. We achieved acceptance in a major database and built a sustainable roadmap for continuous quality.”',
+testimonial1Author: 'Associate Editor at a public university in Qatar',
 
+testimonial2Text: '“The workshop series for editors and reviewers was practical and energizing. Sessions on research visibility, submission quality, and ethics raised our standards right away. Turnaround times improved and author satisfaction increased within one semester.”',
+testimonial2Author: 'Journal Coordinator at a higher education institution in Bahrain',
+
+testimonial3Text: '“We received focused support on meeting indexation criteria along with campus workshops for department leaders and editorial boards. The mix of audits, coaching, and action plans helped our flagship journal reach the required benchmarks and strengthened our internal capabilities.”',
+testimonial3Author: 'Director of Research at a leading university in Saudi Arabia',
+
+        
         footerAbout: 'Empowering universities and academic institutions across the MENA region to achieve global recognition through strategic consulting and professional services.',
         footerServingTitle: 'Serving the MENA Region',
         footerServingText: 'Specialized expertise in both Arabic and English academic publications.',
@@ -790,7 +940,7 @@
         service4Title: 'استشارات البحث العلمي',
         service4Desc: 'إرشاد شامل في استراتيجية البحث وتعزيز الظهور الأكاديمي وتطوير التعاون الدولي لرفع الحضور العالمي.',
 
-        statsTitle: ' قيمة تأثيرنا',
+        statsTitle: ' قيمة تأثيرنا',
         stat1Label: 'مجلات مفهرسة',
         stat2Label: 'سنوات خبرة',
         stat3Label: 'جامعات مخدومة',
@@ -820,8 +970,16 @@
         ctaBlockText: 'انضم إلى جامعات رائدة في المنطقة تثق بفريقنا في رحلة التميز.',
 
         testimonialsTitle: 'آراء عملائنا',
-        testimonialText: 'التعاون معنا رفع ترتيبنا في تصنيف تايمز للتعليم العالي خلال عام واحد بفضل عمل مركز على السمعة والاستشهادات كما شهدنا زيادة في التعاون الدولي وتمويل البحث.',
-        testimonialAuthor: 'عميد البحث العلمي جامعة كبرى في السعودية',
+        //testimonialText: 'التعاون معنا رفع ترتيبنا في تصنيف تايمز للتعليم العالي خلال عام واحد بفضل عمل مركز على السمعة والاستشهادات كما شهدنا زيادة في التعاون الدولي وتمويل البحث.',
+        //testimonialAuthor: 'عميد البحث العلمي جامعة كبرى في السعودية',
+        testimonial1Text: 'قدمت لكم فرقنا إرشادا في كل خطوة من فهرسة المجلة. حسّنا السياسات التحريرية وسير عمل المراجعة وأخلاقيات الاستشهاد عبر قوائم تحقق واضحة وتوجيه عملي. حصلنا على قبول في قاعدة بيانات كبرى ووضعنا خارطة طريق مستدامة للجودة المستمرة.',
+testimonial1Author: 'محرر مشارك في جامعة حكومية في قطر',
+
+testimonial2Text: 'كانت سلسلة الورش للمحررين والمراجعين عملية وملهمة. رفعت الجلسات حول إبراز البحث وجودة الإرسال والأخلاقيات معاييرنا فورا. تحسنت أزمنة المعالجة وارتفع رضا المؤلفين خلال فصل دراسي واحد.',
+testimonial2Author: 'منسق مجلة في مؤسسة تعليم عال في البحرين',
+
+testimonial3Text: 'تلقينا دعما مركزا لتحقيق معايير الفهرسة مع ورش في الحرم لقادة الأقسام وهيئات التحرير. أسهم مزيج المراجعات والتدريب وخطط العمل في بلوغ مجلتنا الرئيسة المعايير المطلوبة وعزّز قدراتنا الداخلية.',
+testimonial3Author: 'مدير البحث العلمي في جامعة رائدة في المملكة العربية السعودية',
 
         footerAbout: 'نمكن الجامعات والمؤسسات الأكاديمية في المنطقة من تحقيق حضور عالمي عبر الاستشارات والخدمات المهنية.',
         footerServingTitle: 'نخدم الشرق الأوسط وشمال أفريقيا',
@@ -987,6 +1145,60 @@
         alertBox.classList.remove('show');
       });
     });
+
+    // Testimonials slider
+(function(){
+  const track = document.querySelector('.ts-track');
+  const slides = Array.from(document.querySelectorAll('.ts-slide'));
+  const prev = document.querySelector('.ts-prev');
+  const next = document.querySelector('.ts-next');
+  const dots = Array.from(document.querySelectorAll('.ts-dot'));
+  if(!track || slides.length === 0) return;
+
+  let index = 0;
+
+  function currentDir(){
+    const d = document.documentElement.getAttribute('dir');
+    return d === 'ar' || d === 'rtl' ? 'rtl' : 'ltr';
+  }
+
+  function update(){
+    const sign = currentDir() === 'rtl' ? 1 : -1;
+    track.style.transform = `translateX(${sign * index * 100}%)`;
+    dots.forEach((d,i)=>{
+      d.classList.toggle('active', i === index);
+      d.setAttribute('aria-selected', String(i === index));
+    });
+  }
+
+  function go(delta){
+    index = (index + delta + slides.length) % slides.length;
+    update();
+  }
+
+  prev.addEventListener('click', ()=> go(-1));
+  next.addEventListener('click', ()=> go(1));
+  dots.forEach((d,i)=> d.addEventListener('click', ()=> { index = i; update(); }));
+
+  // Keyboard support
+  window.addEventListener('keydown', e=>{
+    if(e.key === 'ArrowLeft') go(-1);
+    if(e.key === 'ArrowRight') go(1);
+  });
+
+  // React to language direction changes
+  const obs = new MutationObserver(update);
+  obs.observe(document.documentElement, { attributes: true, attributeFilter: ['dir'] });
+
+  // Optional auto advance
+  let timer = setInterval(()=> go(1), 7000);
+  ['mousedown','touchstart','keydown','focusin'].forEach(evt=>{
+    document.querySelector('.ts').addEventListener(evt, ()=> { clearInterval(timer); }, { once:true });
+  });
+
+  update();
+})();
+
 
     // Initialize default language
     applyLang('en');
