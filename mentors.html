@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Academia Smart Firm | Expert-Mentor Matching Service</title>
+  <meta name="theme-color" content="#42A5FF"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root{
+      /* Sky Dancer brand family */
+      --brand-start:#42A5FF;  /* base */
+      --brand-end:#1E88E5;    /* deeper */
+      --brand-deep:#0B6CD4;   /* deepest */
+      --brand-soft:#E8F4FF;   /* light surface */
+      /* CTAs use the same family */
+      --cta-start:#42A5FF;
+      --cta-end:#1E88E5;
+      /* Ink and surfaces */
+      --ink:#1f2937;
+      --ink-sub:#4b5563;
+      --footer:#0b1b2b;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--ink);
+      overflow-x: hidden;
+      background: #fff;
+    }
+    html[dir="rtl"] body{
+      font-family: 'Cairo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      transition: all 0.3s ease;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .logo img { height: 40px; width: auto; }
+    .nav-right{
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .nav-links { display: flex; list-style: none; gap: 2rem; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    .nav-links a:hover { color: var(--brand-start); }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: linear-gradient(135deg, var(--brand-start) 0%, var(--brand-end) 100%);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    /* Language toggle */
+    .lang-toggle{
+      display: inline-flex;
+      padding: 4px;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 999px;
+      background: rgba(0,0,0,0.04);
+      gap: 4px;
+    }
+    .lang-btn{
+      border: 0;
+      background: transparent;
+      padding: 6px 10px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 999px;
+      font-size: 0.9rem;
+    }
+    .lang-btn.active{
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    /* Hero */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(135deg, var(--brand-start) 0%, var(--brand-end) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,1000 1000,800 1000,1000"/></svg>');
+      animation: float 20s ease-in-out infinite;
+    }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+    .hero-content { max-width: 800px; z-index: 2; position: relative; }
+    .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; opacity: 0; animation: slideUp 1s ease 0.5s forwards; }
+    .hero p { font-size: 1.3rem; margin-bottom: 2rem; opacity: 0; animation: slideUp 1s ease 0.7s forwards; }
+    .cta-button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      opacity: 0;
+      animation: slideUp 1s ease 0.9s forwards;
+    }
+    .cta-button:hover { background: white; color: var(--brand-end); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(11, 108, 212, 0.3); }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+    /* Sections */
+    .section { padding: 6rem 5%; max-width: 1400px; margin: 0 auto; }
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 3rem;
+      background: linear-gradient(135deg, var(--brand-start) 0%, var(--brand-end) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .service-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(66, 165, 255, 0.22); }
+    .service-icon {
+      width: 60px; height: 60px;
+      background: linear-gradient(135deg, var(--brand-start) 0%, var(--brand-end) 100%);
+      border-radius: 15px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem; color: white; font-size: 1.5rem;
+    }
+    .service-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; color: var(--ink); }
+    .service-card p { color: var(--ink-sub); line-height: 1.6; }
+    
+    /* --- NEW CSS FOR MENTOR CARD --- */
+    .mentor-title {
+      font-weight: 600;
+      color: var(--brand-end);
+      margin-bottom: 0.5rem;
+    }
+    /* --- END NEW CSS --- */
+
+    /* Our Impact */
+    .stats {
+      background: linear-gradient(135deg, var(--brand-end) 0%, var(--brand-deep) 100%);
+      color: white;
+      text-align: center;
+      padding: 4rem 5%;
+    }
+    .stats .section-title{
+      background: none;
+      -webkit-background-clip: initial;
+      background-clip: initial;
+      -webkit-text-fill-color: #fff;
+      color: #fff;
+      font-weight: 800;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .stat-item h3 { font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .stat-item p { font-size: 1.1rem; opacity: 0.95; }
+    html[dir="rtl"] .stat-item h3{ direction: ltr; }
+    /* About */
+    .about { background: var(--brand-soft); }
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-text p { font-size: 1.1rem; color: var(--ink-sub); margin-bottom: 1.5rem; line-height: 1.8; }
+    .expertise-list { list-style: none; margin-top: 2rem; }
+    .expertise-list li { padding: 0.5rem 0; color: #555; position: relative; padding-left: 2rem; }
+    .expertise-list li::before { content: '✓'; position: absolute; left: 0; color: var(--brand-start); font-weight: bold; }
+    html[dir="rtl"] .expertise-list li{ padding-left: 0; padding-right: 2rem; }
+    html[dir="rtl"] .expertise-list li::before{ left: auto; right: 0; }
+    /* Testimonial */
+    .testimonial {
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      margin: 3rem 0;
+      position: relative;
+    }
+    .testimonial::before {
+      content: '"';
+      position: absolute; top: -10px; left: 20px;
+      font-size: 4rem; color: var(--brand-start); font-weight: bold;
+    }
+    html[dir="rtl"] .testimonial::before{ left:auto; right:20px; }
+    .testimonial p { font-style: italic; font-size: 1.1rem; line-height: 1.8; margin-bottom: 1rem; }
+    .testimonial-author { font-weight: 700; color: var(--brand-end); }
+    /* Testimonial slider */
+.ts { position: relative; max-width: 900px; margin: 0 auto; }
+.ts-viewport { overflow: hidden; border-radius: 20px; }
+.ts-track { display: flex; transition: transform 0.5s ease; }
+.ts-slide { min-width: 100%; }
+.ts-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px; border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(255,255,255,0.9);
+  cursor: pointer; font-size: 1.4rem; line-height: 1;
+  display: grid; place-items: center;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+.ts-prev { left: 6px; }
+.ts-next { right: 6px; }
+.ts-btn:hover { background: #fff; box-shadow: 0 10px 24px rgba(66,165,255,0.20); border-color: rgba(66,165,255,0.35); }
+.ts-dots { display: flex; justify-content: center; gap: 8px; margin-top: 1rem; }
+.ts-dot {
+  width: 10px; height: 10px; border-radius: 999px;
+  border: 0; cursor: pointer; background: rgba(0,0,0,0.2);
+}
+.ts-dot.active { background: var(--brand-end); width: 28px; }
+    /* Footer */
+    .footer { background: var(--footer); color: white; padding: 4rem 5% 2rem; }
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1.2fr;
+      gap: 3rem;
+      align-items: start;
+      text-align: left;
+    }
+    html[dir="rtl"] .footer-content{ text-align: right; }
+    .footer-section h3 { margin-bottom: 1.2rem; color: var(--cta-start); font-size: 1.2rem; }
+    .footer-section p { line-height: 1.6; margin-bottom: 1rem; color: #ccd6e0; }
+    .footer-logo { display: flex; align-items: center; gap: 15px; margin-bottom: 2rem; }
+    .footer-logo img { height: 50px; width: auto; }
+    .footer-logo span { font-size: 1.3rem; font-weight: 800; color: white; }
+    /* Address block */
+    .footer-address { margin-top: 1rem; }
+    .addr-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0.35rem 0;
+      color: #ccd6e0;
+    }
+    html[dir="rtl"] .addr-line{ flex-direction: row-reverse; }
+    .addr-icon {
+      display: inline-flex;
+      width: 28px; height: 28px;
+      align-items: center; justify-content: center;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      line-height: 1;
+      flex: 0 0 28px;
+    }
+    .footer-address a { color: #ccd6e0; text-decoration: none; }
+    .footer-address a:hover { color: var(--cta-start); }
+    /* Map card */
+    .map-card {
+      margin-top: 1rem;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.04);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      aspect-ratio: 16 / 9;
+    }
+    .map-card iframe { width: 100%; height: 100%; border: 0; }
+    /* Footer form */
+    .footer .contact-form {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      height: fit-content;
+    }
+    .footer .contact-form h3 { color: white; }
+    .footer .form-group { margin-bottom: 1.2rem; }
+    .footer .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 700; color: #dde7f0; }
+    .footer .form-group input,
+    .footer .form-group textarea,
+    .footer .form-group select {
+      width: 100%;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+      font-family: inherit;
+      color: white;
+    }
+    .footer .form-group textarea { min-height: 120px; resize: vertical; }
+    .footer .form-group input::placeholder,
+    .footer .form-group textarea::placeholder { color: rgba(255, 255, 255, 0.6); }
+    .footer .form-group input:focus,
+    .footer .form-group textarea:focus,
+    .footer .form-group select:focus { outline: none; border-color: var(--cta-start); }
+    .submit-btn {
+      background: linear-gradient(135deg, var(--cta-start) 0%, var(--cta-end) 100%);
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(66, 165, 255, 0.3); }
+    .submit-btn[disabled] { opacity: 0.7; cursor: not-allowed; }
+    /* Alerts */
+    .form-alert {
+      display: none;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
+      border: 1px solid rgba(66, 165, 255, 0.35);
+      background: rgba(66, 165, 255, 0.12);
+      color: #e7f0ff;
+    }
+    .form-alert.show { display: block; }
+    .error-text {
+      display: none;
+      font-size: 0.85rem;
+      margin-top: 0.4rem;
+      color: #ffb3b3;
+    }
+    .error-text.active { display: block; }
+    .input-error { border-color: #ef4444 !important; }
+    .footer-bottom {
+      grid-column: 1 / -1;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #365670;
+      text-align: center;
+      color: #9db5c7;
+    }
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: 2.5rem; }
+      .hero p { font-size: 1.1rem; }
+      .about-content { grid-template-columns: 1fr; gap: 2rem; }
+      .section { padding: 4rem 5%; }
+      .footer-content { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+      html[dir="rtl"] .footer-content{ text-align: center; }
+      .footer .contact-form { text-align: left; }
+      html[dir="rtl"] .footer .contact-form{ text-align: right; }
+      .addr-line { justify-content: center; }
+      .map-card { aspect-ratio: 4 / 3; }
+    }
+    /* RTL footer address alignment */
+html[dir="rtl"] .footer-address { 
+  text-align: right;
+}
+html[dir="rtl"] .addr-line {
+  width: 100%;
+  flex-direction: row;          /* keep icon then text */
+  justify-content: flex-end;    /* move the row to the right */
+}
+html[dir="rtl"] .addr-icon {
+  margin-inline-end: 10px;      /* space between icon and text */
+  margin-inline-start: 0;
+}
+    /* Scroll animations */
+    .fade-in { opacity: 0; transform: translateY(50px); transition: all 0.8s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <div class="logo">
+        <a href="index.html" aria-label="Back to home">
+          <img src="logo.png" alt="ASF Logo"/>
+        </a>
+      </div>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="index.html" data-i18n="navHome">Home</a></li>
+          <li><a href="#overview" data-i18n="navOverview">Overview</a></li>
+          <li><a href="#sectors" data-i18n="navSectors">Expertise</a></li>
+          <li><a href="#program" data-i18n="navProgram">Program</a></li>
+          <li><a href="#mentors" data-i18n="navMentors">Mentors</a></li>
+          <li><a href="#contact" data-i18n="navContact">Contact</a></li>
+        </ul>
+        <div class="lang-toggle" aria-label="Language switch">
+          <button class="lang-btn active" id="btnEn" data-lang="en" aria-pressed="true">EN</button>
+          <button class="lang-btn" id="btnAr" data-lang="ar" aria-pressed="false">AR</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <section id="overview" class="hero">
+    <div class="hero-content">
+      <h1 data-i18n="heroTitle">Expert-Mentor Matching Service</h1>
+      <p data-i18n="heroSubtitle">Facilitating meaningful connections between startups and experienced mentors across various technical sectors. Leveraging our extensive global network, we provide tailored matchmaking to ensure your startup receives the guidance and insights necessary for growth and innovation. </p>
+      <a href="#mentors" class="cta-button" data-i18n="heroCta">Meet Our Mentors</a>
+    </div>
+  </section>
+  <section id="sectors" class="section">
+    <h2 class="section-title fade-in" data-i18n="sectorsTitle">Unlock Innovation with Expert Insights</h2> 
+    <p class="fade-in" style="text-align: center; font-size: 1.2rem; color: #666; max-width: 800px; margin: 0 auto 3rem;" data-i18n="sectorsIntro">
+      At ASF, our network of experts offers a wealth of knowledge across various cutting-edge technology sectors, dedicated to harnessing innovation for businesses ready to embrace the future.  Explore their diverse offerings: 
+    </p>
+    <div class="services-grid">
+      <div class="service-card fade-in">
+        <div class="service-icon">🤖</div>
+        <h3 data-i18n="sector1Title">Artificial Intelligence (AI) and Machine Learning</h3>
+        <p data-i18n="sector1Desc">Experts develop advanced algorithms and automated systems that leverage data to enhance decision-making and boost efficiency.</p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">💳</div>
+        <h3 data-i18n="sector2Title">Fintech (Financial Technology)</h3>
+        <p data-i18n="sector2Desc">Innovators revolutionize financial services through mobile payments, online lending, robo-advisors, and personal finance management tools.</p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">🩺</div>
+        <h3 data-i18n="sector3Title">Health Tech</h3>
+        <p data-i18n="sector3Desc">Professionals focus on improving healthcare outcomes through telemedicine, wearable health devices, and medical AI. </p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">🎓</div>
+        <h3 data-i18n="sector4Title">Edtech (Educational Technology)</h3>
+        <p data-i18n="sector4Desc">Experts create innovative solutions that transform learning experiences via virtual classrooms, online courses, and engaging educational apps. </p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">☁️</div>
+        <h3 data-i18n="sector5Title">SaaS (Software as a Service)</h3>
+        <p data-i18n="sector5Desc">Specialists offer subscription-based software solutions that deliver applications over the internet, empowering businesses with collaboration and productivity tools. </p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">📡</div>
+        <h3 data-i18n="sector6Title">IoT (Internet of Things)</h3>
+        <p data-i18n="sector6Desc">Experts in connected devices and data exchange drive initiatives in smart home applications, industrial solutions, and health monitoring systems. </p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">🛒</div>
+        <h3 data-i18n="sector7Title">E-commerce</h3>
+        <p data-i18n="sector7Desc">Our team optimizes online shopping experiences with innovative platforms, logistics solutions, and payment systems.</p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">🔒</div>
+        <h3 data-i18n="sector8Title">Cybersecurity</h3>
+        <p data-i18n="sector8Desc">Protect digital assets with expert solutions focused on threat detection, data encryption, and risk management.</p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">🌿</div>
+        <h3 data-i18n="sector9Title">Clean Tech</h3>
+        <p data-i18n="sector9Desc">Committed to sustainability, specialists deliver technologies that promote renewable energy, efficient waste management, and energy-saving solutions. </p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">📱</div>
+        <h3 data-i18n="sector10Title">Social Media and Content Creation</h3>
+        <p data-i18n="sector10Desc">Professionals empower brands and creators with platforms and tools for content creation, sharing, and monetization. </p>
+      </div>
+    </div>
+  </section>
+  <section id="program" class="section about">
+    <h2 class="section-title fade-in" data-i18n="programTitle">Our Mentoring Program Overview</h2> 
+    <p class="fade-in" style="text-align: center; font-size: 1.2rem; color: #444; max-width: 800px; margin: 0 auto 3rem;" data-i18n="programIntro">
+      Our structured mentoring program is designed specifically for startups, leveraging the expertise of seasoned professionals.  This initiative fosters innovation and enhances the journey of startups as they navigate the complexities of business development. 
+    </p>
+    <div class="services-grid">
+      <div class="service-card fade-in">
+        <div class="service-icon">1️⃣</div>
+        <h3 data-i18n="step1Title">Startup Pitch for Experienced Experts</h3>  
+        <p data-i18n="step1Desc">Startups present their business concepts, challenges, and needs to a panel of experienced professionals.   This provides valuable feedback and the potential to attract mentors or investors.  </p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">2️⃣</div>
+        <h3 data-i18n="step2Title">Expression of Interest</h3>  
+        <p data-i18n="step2Desc">We launch a call for interest targeting our community of professionals with relevant experience and skills who are eager to mentor startups, detailing their availability. </p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">3️⃣</div>
+        <h3 data-i18n="step3Title">Selection of Board of Experts</h3> 
+        <p data-i18n="step3Desc">We assemble a diverse board of experts for each TRL stage, ensuring representation from domains like technology and business.  Each board provides tailored guidance aligned with the unique challenges of each stage. </p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">4️⃣</div>
+        <h3 data-i18n="step4Title">Stage Development Plan</h3> 
+        <p data-i18n="step4Desc">Experts collaborate with startups to create development plans outlining key milestones, critical activities, and timelines.  The plan includes recommended tools, processes, and frameworks. </p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">5️⃣</div>
+        <h3 data-i18n="step5Title">Regular Meetings and KPI for Progress</h3> 
+        <p data-i18n="step5Desc">Establish a routine for board meetings (e.g., bi-weekly or monthly) to assess progress.  We define specific KPIs to measure progress, such as user acquisition rates or product milestones.</p>
+      </div>
+    </div>
+  </section>
+  <section id="mentors" class="section">
+    <h2 class="section-title fade-in" data-i18n="mentorsTitle">Meet Our Expert Mentors</h2>
+    <div class="services-grid">
+      <div class="service-card fade-in">
+        <div class="service-icon">👤</div>
+        <h3 data-i18n="mentor1Name">Mostapha Harb</h3> 
+        <p class="mentor-title" data-i18n="mentor1Title">Founder of InsightsGliders | Mediator and Lead expert</p> 
+        <p data-i18n="mentor1Bio">A highly skilled professional with a robust background in engineering and project management, focusing on Machine Learning and AI applications. He excels at guiding projects from prototype validation to real-world application and market readiness.</p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">👤</div>
+        <h3 data-i18n="mentor2Name">Nikica Marinković</h3> 
+        <p class="mentor-title" data-i18n="mentor2Title">Founder of AgroAkcelerator | Digital Agricultural Specialist</p> 
+        <p data-i18n="mentor2Bio">A Digital Agricultural Specialist at the UN Food and Agriculture Organization (FAO) in Serbia.  He has overseen AgTech and robotics projects exceeding 20 million EUR  and is the founder of AgroAkcelerator, empowering student entrepreneurs. </p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">👤</div>
+        <h3 data-i18n="mentor3Name">Caterina Giacomelli</h3> 
+        <p class="mentor-title" data-i18n="mentor3Title">Physicist & Data Scientist</p> 
+        <p data-i18n="mentor3Bio">A physicist and data scientist specializing in Earth Observation, geospatial analytics, and applied machine learning for natural hazard monitoring.  She is a Venture Builder Fellow at Carbon13, developing startups to address climate change. </p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">👤</div>
+        <h3 data-i18n="mentor4Name">Gianni Cristian Iannelli</h3> 
+        <p class="mentor-title" data-i18n="mentor4Title">Co-founder & CEO at Saturnalia | Geospatial Data Expert</p> 
+        <p data-i18n="mentor4Bio">An entrepreneur with over a decade of experience.  As CEO of Saturnalia, he leverages remote sensing and AI for the Agritech and Insurtech markets.  He previously co-founded Ticinum Aerospace, securing €1.5 million in R&D funding. </p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">👤</div>
+        <h3 data-i18n="mentor5Name">Hadi Harb</h3> 
+        <p class="mentor-title" data-i18n="mentor5Title">Finance Professional | Academic Leader</p> 
+        <p data-i18n="mentor5Bio">A finance professional with a Ph.D.  and over eight years of experience.  He is an Assistant Professor and Coordinator of the Finance & Accounting Department.  His research interests include fintech, mobile payments, online lending, and risk management. </p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">👤</div>
+        <h3 data-i18n="mentor6Name">Khaled Sami</h3> 
+        <p class="mentor-title" data-i18n="mentor6Title">Sales & Marketing Specialist</p> 
+        <p data-i18n="mentor6Bio">An experienced Business Development Professional with over 7 years in sales, strategic partnerships, and market expansion, particularly in the healthcare, pharmaceuticals, and technology sectors.  He holds a Master's in Business and Management from Vilnius University. </p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">👤</div>
+        <h3 data-i18n="mentor7Name">Georg Rubicko</h3> 
+        <p class="mentor-title" data-i18n="mentor7Title">Business Development Manager</p>
+        <p data-i18n="mentor7Bio">A seasoned business development manager with extensive experience in the healthcare sector, currently at Mavie Med Holding GmbH.  His expertise includes M&A activities, location development, and innovation management focusing on digital assistance technologies and telemedicine.</p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">👤</div>
+        <h3 data-i18n="mentor8Name">Ahmed Elsayyad</h3> 
+        <p class="mentor-title" data-i18n="mentor8Title">Business Development & Production Manager</p> 
+        <p data-i18n="mentor8Bio">A skilled manager with experience in local and international markets, currently at ELSAYYAD for Trading & Industry in Egypt. He excels at identifying new business opportunities, building client relations, and aligning production supplies with market demands.</p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">👤</div>
+        <h3 data-i18n="mentor9Name">Amani Abi Nassif</h3> 
+        <p class="mentor-title" data-i18n="mentor9Title">Agricultural Engineer | Marketing Manager | Startup Developer</p> 
+        <p data-i18n="mentor9Bio">An Agricultural Engineer and Marketing Manager at Shajara Tayeba Association, where she leads large-scale agricultural exhibitions. Her expertise includes project management, crop production optimization, and developing marketing strategies for innovative agricultural products.</p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">👤</div>
+        <h3 data-i18n="mentor10Name">Andreas Salentinig</h3> 
+        <p class="mentor-title" data-i18n="mentor10Title">CEO and Founder at ubicube | Earth Observation Scientist</p> 
+        <p data-i18n="mentor10Bio">An Earth Observation scientist who founded ubicube to drive innovative solutions for urban mapping and environmental monitoring. He also serves as a lecturer at the University of Graz in remote sensing. </p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">👤</div>
+        <h3 data-i18n="mentor11Name">Andrés Abarca Jiménez</h3> 
+        <p class="mentor-title" data-i18n="mentor11Title">CEO of ATLAS Consulting | Product Manager</p> 
+        <p data-i18n="mentor11Bio">The CEO of ATLAS Consulting with extensive experience in structural engineering and disaster risk management.  He has a strong track record in commercializing research, managing technology transfers, and mentoring research teams toward entrepreneurial success.</p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">👤</div>
+        <h3 data-i18n="mentor12Name">Kamal Ahmad</h3> 
+        <p class="mentor-title" data-i18n="mentor12Title">CEO of Economic Resilience</p> 
+        <p data-i18n="mentor12Bio">A specialist in the Economics of Natural Hazards and Climate Change with over 15 years of international experience.  He is the Founder and CEO of the Institute for Economic Resilience, developing frameworks to enhance resilience and promote sustainable economic growth. </p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">👤</div>
+        <h3 data-i18n="mentor13Name">Carlotta Rodriguez</h3> 
+        <p class="mentor-title" data-i18n="mentor13Title">Architect | Engineer | Risk and Emergency Manager</p> 
+        <p data-i18n="mentor13Bio">The Founder and Managing Director of Adenium Risk and Coaching in Dubai. With a Ph.D. in Risk and Emergency Management, she helps governments enhance disaster resilience and serves as Vice-President of a PIARC technical committee.</p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">👤</div>
+        <h3 data-i18n="mentor14Name">Daniele Bortolotti</h3> 
+        <p class="mentor-title" data-i18n="mentor14Title">Staff R&D Engineer</p> 
+        <p data-i18n="mentor14Bio">A skilled engineer in Berlin specializing in embedded software development.  He was instrumental in developing a neuromorphic processor under DARPA funding, filing multiple patents and leading a successful €15 million funding round. </p>
+      </div>
+    </div>
+  </section>
+  <footer id="contact" class="footer">
+    <div class="footer-content">
+      <div class="footer-left">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <img src="logo.png" alt="ASF Logo"/>
+          </div>
+          <p data-i18n="footerAbout">
+            Empowering universities and academic institutions across the MENA region to achieve global recognition through strategic consulting and professional services.
+          </p>
+          <p style="margin-top: 1rem;">
+            <strong data-i18n="footerServingTitle">Serving the MENA Region</strong><br/>
+            <span data-i18n="footerServingText">Specialized expertise in both Arabic and English academic publications.</span>
+          </p>
+        </div>
+        <div class="footer-section">
+          <h3 data-i18n="contactInfoTitle">Contact Information</h3>
+          <address class="footer-address" itemscope itemtype="https://schema.org/PostalAddress">
+            <p class="addr-line">
+              <span class="addr-icon" aria-hidden="true">📍</span>
+              <span itemprop="streetAddress" data-i18n="addr1">The Meydan Grandstand</span>
+            </p>
+            <p class="addr-line">
+              <span class="addr-icon" aria-hidden="true">🏢</span>
+              <span itemprop="streetAddress" data-i18n="addr2">Sixth Floor Meydan Road</span>
+            </p>
+            <p class="addr-line">
+              <span class="addr-icon" aria-hidden="true">🌆</span>
+              <span itemprop="addressLocality" data-i18n="addr3">Nad Al Sheba Dubai UAE</span>
+            </p>
+            <p class="addr-line">
+              <span class="addr-icon" aria-hidden="true">✉️</span>
+              <a href="mailto:info@academiasmartfirm.com" itemprop="email">info@academiasmartfirm.com</a>
+            </p>
+          </address>
+          <div class="map-card" aria-label="Map to our address">
+            <iframe
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=The%20Meydan%20Hotel%20Grandstand%206th%20Floor%20Meydan%20Road%20Nad%20Al%20Sheba%20Dubai%20UAE&output=embed"
+              title="Location map for Academia Smart Firm"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h3 data-i18n="formTitle">Get In Touch</h3>
+        <div id="formAlert" class="form-alert" role="status" aria-live="polite"></div>
+        <form id="contactForm" novalidate>
+          <div class="form-group">
+            <label for="name" data-i18n="labelName">Full Name *</label>
+            <input type="text" id="name" name="name" required aria-label="Full Name" />
+            <div class="error-text" id="err-name" data-i18n="errName">Please enter your full name.</div>
+          </div>
+          <div class="form-group">
+            <label for="email" data-i18n="labelEmail">Email Address *</label>
+            <input type="email" id="email" name="email" required aria-label="Email Address" />
+            <div class="error-text" id="err-email" data-i18n="errEmail">Please enter a valid email address.</div>
+          </div>
+          <div class="form-group">
+            <label for="organization" data-i18n="labelOrg">Organization or Institution</label>
+            <input type="text" id="organization" name="organization" aria-label="Organization or Institution" />
+          </div>
+          <div class="form-group">
+            <label for="service" data-i18n="labelService">Service of Interest</label>
+            <select id="service" name="service" aria-label="Service of Interest">
+              <option value="" data-i18n="svcSelect">Select a service...</option>
+              <option value="mentoring" data-i18n="svcMentoring">Expert-Mentor Matching</option>
+              <option value="ranking" data-i18n="svcRanking">University Ranking Enhancement</option>
+              <option value="indexing" data-i18n="svcIndexing">Journal Indexing Services</option>
+              <option value="translation" data-i18n="svcTranslation">Translation and Proofreading</option>
+              <option value="consulting" data-i18n="svcConsulting">Research Consulting</option>
+              <option value="other" data-i18n="svcOther">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message" data-i18n="labelMessage">Message *</label>
+            <textarea id="message" name="message" required aria-label="Message" data-i18n-placeholder="phMessage" placeholder="Tell us about your requirements..."></textarea>
+            <div class="error-text" id="err-message" data-i18n="errMessage">Please share a short summary of your needs.</div>
+          </div>
+          <button type="submit" class="submit-btn" id="submitBtn" data-i18n="btnSubmit">Send Message</button>
+        </form>
+      </div>
+      <div class="footer-bottom">
+        <p data-i18n="rights">© 2025 Academia Smart Firm. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // Language dictionaries
+    const i18n = {
+      en: {
+        // --- Nav ---
+        navHome: 'Home',
+        navOverview: 'Overview',
+        navSectors: 'Expertise',
+        navProgram: 'Program',
+        navMentors: 'Mentors',
+        navContact: 'Contact',
+        // --- Hero ---
+        heroTitle: 'Expert-Mentor Matching Service',
+        heroSubtitle: 'Facilitating meaningful connections between startups and experienced mentors across various technical sectors. Leveraging our extensive global network, we provide tailored matchmaking to ensure your startup receives the guidance and insights necessary for growth and innovation.',
+        heroCta: 'Meet Our Mentors',
+        // --- Sectors ---
+        sectorsTitle: 'Unlock Innovation with Expert Insights',
+        sectorsIntro: 'At ASF, our network of experts offers a wealth of knowledge across various cutting-edge technology sectors, dedicated to harnessing innovation for businesses ready to embrace the future. Explore their diverse offerings:',
+        sector1Title: 'Artificial Intelligence (AI) and Machine Learning',
+        sector1Desc: 'Experts develop advanced algorithms and automated systems that leverage data to enhance decision-making and boost efficiency.',
+        sector2Title: 'Fintech (Financial Technology)',
+        sector2Desc: 'Innovators revolutionize financial services through mobile payments, online lending, robo-advisors, and personal finance management tools.',
+        sector3Title: 'Health Tech',
+        sector3Desc: 'Professionals focus on improving healthcare outcomes through telemedicine, wearable health devices, and medical AI.',
+        sector4Title: 'Edtech (Educational Technology)',
+        sector4Desc: 'Experts create innovative solutions that transform learning experiences via virtual classrooms, online courses, and engaging educational apps.',
+        sector5Title: 'SaaS (Software as a Service)',
+        sector5Desc: 'Specialists offer subscription-based software solutions that deliver applications over the internet, empowering businesses with collaboration and productivity tools.',
+        sector6Title: 'IoT (Internet of Things)',
+        sector6Desc: 'Experts in connected devices and data exchange drive initiatives in smart home applications, industrial solutions, and health monitoring systems.',
+        sector7Title: 'E-commerce',
+        sector7Desc: 'Our team optimizes online shopping experiences with innovative platforms, logistics solutions, and payment systems.',
+        sector8Title: 'Cybersecurity',
+        sector8Desc: 'Protect digital assets with expert solutions focused on threat detection, data encryption, and risk management.',
+        sector9Title: 'Clean Tech',
+        sector9Desc: 'Committed to sustainability, specialists deliver technologies that promote renewable energy, efficient waste management, and energy-saving solutions.',
+        sector10Title: 'Social Media and Content Creation',
+        sector10Desc: 'Professionals empower brands and creators with platforms and tools for content creation, sharing, and monetization.',
+        // --- Program ---
+        programTitle: 'Our Mentoring Program Overview',
+        programIntro: 'Our structured mentoring program is designed specifically for startups, leveraging the expertise of seasoned professionals. This initiative fosters innovation and enhances the journey of startups as they navigate the complexities of business development.',
+        step1Title: 'Startup Pitch for Experienced Experts',
+        step1Desc: 'Startups present their business concepts, challenges, and needs to a panel of experienced professionals. This provides valuable feedback and the potential to attract mentors or investors.',
+        step2Title: 'Expression of Interest',
+        step2Desc: 'We launch a call for interest targeting our community of professionals with relevant experience and skills who are eager to mentor startups, detailing their availability.',
+        step3Title: 'Selection of Board of Experts',
+        step3Desc: 'We assemble a diverse board of experts for each TRL stage, ensuring representation from domains like technology and business. Each board provides tailored guidance aligned with the unique challenges of each stage.',
+        step4Title: 'Stage Development Plan',
+        step4Desc: 'Experts collaborate with startups to create development plans outlining key milestones, critical activities, and timelines. The plan includes recommended tools, processes, and frameworks.',
+        step5Title: 'Regular Meetings and KPI for Progress',
+        step5Desc: 'Establish a routine for board meetings (e.g., bi-weekly or monthly) to assess progress. We define specific KPIs to measure progress, such as user acquisition rates or product milestones.',
+        // --- Mentors ---
+        mentorsTitle: 'Meet Our Expert Mentors',
+        mentor1Name: 'Mostapha Harb',
+        mentor1Title: 'Founder of InsightsGliders | Mediator and Lead expert',
+        mentor1Bio: 'A highly skilled professional with a robust background in engineering and project management, focusing on Machine Learning and AI applications. He excels at guiding projects from prototype validation to real-world application and market readiness.',
+        mentor2Name: 'Nikica Marinković',
+        mentor2Title: 'Founder of AgroAkcelerator | Digital Agricultural Specialist',
+        mentor2Bio: 'A Digital Agricultural Specialist at the UN Food and Agriculture Organization (FAO) in Serbia. He has overseen AgTech and robotics projects exceeding 20 million EUR and is the founder of AgroAkcelerator, empowering student entrepreneurs.',
+        mentor3Name: 'Caterina Giacomelli',
+        mentor3Title: 'Physicist & Data Scientist',
+        mentor3Bio: 'A physicist and data scientist specializing in Earth Observation, geospatial analytics, and applied machine learning for natural hazard monitoring. She is a Venture Builder Fellow at Carbon13, developing startups to address climate change.',
+        mentor4Name: 'Gianni Cristian Iannelli',
+        mentor4Title: 'Co-founder & CEO at Saturnalia | Geospatial Data Expert',
+        mentor4Bio: 'An entrepreneur with over a decade of experience. As CEO of Saturnalia, he leverages remote sensing and AI for the Agritech and Insurtech markets. He previously co-founded Ticinum Aerospace, securing €1.5 million in R&D funding.',
+        mentor5Name: 'Hadi Harb',
+        mentor5Title: 'Finance Professional | Academic Leader',
+        mentor5Bio: 'A finance professional with a Ph.D. and over eight years of experience. He is an Assistant Professor and Coordinator of the Finance & Accounting Department. His research interests include fintech, mobile payments, online lending, and risk management.',
+        mentor6Name: 'Khaled Sami',
+        mentor6Title: 'Sales & Marketing Specialist',
+        mentor6Bio: 'An experienced Business Development Professional with over 7 years in sales, strategic partnerships, and market expansion, particularly in the healthcare, pharmaceuticals, and technology sectors. He holds a Master\'s in Business and Management from Vilnius University.',
+        mentor7Name: 'Georg Rubicko',
+        mentor7Title: 'Business Development Manager',
+        mentor7Bio: 'A seasoned business development manager with extensive experience in the healthcare sector, currently at Mavie Med Holding GmbH. His expertise includes M&A activities, location development, and innovation management focusing on digital assistance technologies and telemedicine.',
+        mentor8Name: 'Ahmed Elsayyad',
+        mentor8Title: 'Business Development & Production Manager',
+        mentor8Bio: 'A skilled manager with experience in local and international markets, currently at ELSAYYAD for Trading & Industry in Egypt. He excels at identifying new business opportunities, building client relations, and aligning production supplies with market demands.',
+        mentor9Name: 'Amani Abi Nassif',
+        mentor9Title: 'Agricultural Engineer | Marketing Manager | Startup Developer',
+        mentor9Bio: 'An Agricultural Engineer and Marketing Manager at Shajara Tayeba Association, where she leads large-scale agricultural exhibitions. Her expertise includes project management, crop production optimization, and developing marketing strategies for innovative agricultural products.',
+        mentor10Name: 'Andreas Salentinig',
+        mentor10Title: 'CEO and Founder at ubicube | Earth Observation Scientist',
+        mentor10Bio: 'An Earth Observation scientist who founded ubicube to drive innovative solutions for urban mapping and environmental monitoring. He also serves as a lecturer at the University of Graz in remote sensing.',
+        mentor11Name: 'Andrés Abarca Jiménez',
+        mentor11Title: 'CEO of ATLAS Consulting | Product Manager',
+        mentor11Bio: 'The CEO of ATLAS Consulting with extensive experience in structural engineering and disaster risk management. He has a strong track record in commercializing research, managing technology transfers, and mentoring research teams toward entrepreneurial success.',
+        mentor12Name: 'Kamal Ahmad',
+        mentor12Title: 'CEO of Economic Resilience',
+        mentor12Bio: 'A specialist in the Economics of Natural Hazards and Climate Change with over 15 years of international experience. He is the Founder and CEO of the Institute for Economic Resilience, developing frameworks to enhance resilience and promote sustainable economic growth.',
+        mentor13Name: 'Carlotta Rodriguez',
+        mentor13Title: 'Architect | Engineer | Risk and Emergency Manager',
+        mentor13Bio: 'The Founder and Managing Director of Adenium Risk and Coaching in Dubai. With a Ph.D. in Risk and Emergency Management, she helps governments enhance disaster resilience and serves as Vice-President of a PIARC technical committee.',
+        mentor14Name: 'Daniele Bortolotti',
+        mentor14Title: 'Staff R&D Engineer',
+        mentor14Bio: 'A skilled engineer in Berlin specializing in embedded software development. He was instrumental in developing a neuromorphic processor under DARPA funding, filing multiple patents and leading a successful €15 million funding round.',
+        // --- Footer (Copied from index) ---
+        footerAbout: 'Empowering universities and academic institutions across the MENA region to achieve global recognition through strategic consulting and professional services.',
+        footerServingTitle: 'Serving the MENA Region',
+        footerServingText: 'Specialized expertise in both Arabic and English academic publications.',
+        contactInfoTitle: 'Contact Information',
+        addr1: 'The Meydan Grandstand',
+        addr2: 'Sixth Floor Meydan Road',
+        addr3: 'Nad Al Sheba Dubai UAE',
+        formTitle: 'Get In Touch',
+        labelName: 'Full Name *',
+        labelEmail: 'Email Address *',
+        labelOrg: 'Organization or Institution',
+        labelService: 'Service of Interest',
+        svcSelect: 'Select a service...',
+        svcMentoring: 'Expert-Mentor Matching',
+        svcRanking: 'University Ranking Enhancement',
+        svcIndexing: 'Journal Indexing Services',
+        svcTranslation: 'Translation and Proofreading',
+        svcConsulting: 'Research Consulting',
+        svcOther: 'Other',
+        labelMessage: 'Message *',
+        phMessage: 'Tell us about your requirements...',
+        btnSubmit: 'Send Message',
+        errName: 'Please enter your full name.',
+        errEmail: 'Please enter a valid email address.',
+        errMessage: 'Please share a short summary of your needs.',
+        formIncomplete: 'Please complete the highlighted fields.',
+        formThanks: 'Thank you. Your email app will open now. If it does not, please email us at info@academiasmartfirm.com',
+        rights: '© 2025 Academia Smart Firm. All rights reserved.'
+      },
+      ar: {
+        // --- (ARABIC PLACEHOLDERS - PLEASE TRANSLATE) ---
+        // --- Nav ---
+        navHome: 'الرئيسية',
+        navOverview: 'نظرة عامة',
+        navSectors: 'الخبرات',
+        navProgram: 'البرنامج',
+        navMentors: 'المرشدون',
+        navContact: 'تواصل معنا',
+        // --- Hero ---
+        heroTitle: 'Expert-Mentor Matching Service',
+        heroSubtitle: 'Facilitating meaningful connections between startups and experienced mentors across various technical sectors. Leveraging our extensive global network, we provide tailored matchmaking to ensure your startup receives the guidance and insights necessary for growth and innovation.',
+        heroCta: 'Meet Our Mentors',
+        // --- Sectors ---
+        sectorsTitle: 'Unlock Innovation with Expert Insights',
+        sectorsIntro: 'At ASF, our network of experts offers a wealth of knowledge across various cutting-edge technology sectors, dedicated to harnessing innovation for businesses ready to embrace the future. Explore their diverse offerings:',
+        sector1Title: 'Artificial Intelligence (AI) and Machine Learning',
+        sector1Desc: 'Experts develop advanced algorithms and automated systems that leverage data to enhance decision-making and boost efficiency.',
+        sector2Title: 'Fintech (Financial Technology)',
+        sector2Desc: 'Innovators revolutionize financial services through mobile payments, online lending, robo-advisors, and personal finance management tools.',
+        sector3Title: 'Health Tech',
+        sector3Desc: 'Professionals focus on improving healthcare outcomes through telemedicine, wearable health devices, and medical AI.',
+        sector4Title: 'Edtech (Educational Technology)',
+        sector4Desc: 'Experts create innovative solutions that transform learning experiences via virtual classrooms, online courses, and engaging educational apps.',
+        sector5Title: 'SaaS (Software as a Service)',
+        sector5Desc: 'Specialists offer subscription-based software solutions that deliver applications over the internet, empowering businesses with collaboration and productivity tools.',
+        sector6Title: 'IoT (Internet of Things)',
+        sector6Desc: 'Experts in connected devices and data exchange drive initiatives in smart home applications, industrial solutions, and health monitoring systems.',
+        sector7Title: 'E-commerce',
+        sector7Desc: 'Our team optimizes online shopping experiences with innovative platforms, logistics solutions, and payment systems.',
+        sector8Title: 'Cybersecurity',
+        sector8Desc: 'Protect digital assets with expert solutions focused on threat detection, data encryption, and risk management.',
+        sector9Title: 'Clean Tech',
+        sector9Desc: 'Committed to sustainability, specialists deliver technologies that promote renewable energy, efficient waste management, and energy-saving solutions.',
+        sector10Title: 'Social Media and Content Creation',
+        sector10Desc: 'Professionals empower brands and creators with platforms and tools for content creation, sharing, and monetization.',
+        // --- Program ---
+        programTitle: 'Our Mentoring Program Overview',
+        programIntro: 'Our structured mentoring program is designed specifically for startups, leveraging the expertise of seasoned professionals. This initiative fosters innovation and enhances the journey of startups as they navigate the complexities of business development.',
+        step1Title: 'Startup Pitch for Experienced Experts',
+        step1Desc: 'Startups present their business concepts, challenges, and needs to a panel of experienced professionals. This provides valuable feedback and the potential to attract mentors or investors.',
+        step2Title: 'Expression of Interest',
+        step2Desc: 'We launch a call for interest targeting our community of professionals with relevant experience and skills who are eager to mentor startups, detailing their availability.',
+        step3Title: 'Selection of Board of Experts',
+        step3Desc: 'We assemble a diverse board of experts for each TRL stage, ensuring representation from domains like technology and business. Each board provides tailored guidance aligned with the unique challenges of each stage.',
+        step4Title: 'Stage Development Plan',
+        step4Desc: 'Experts collaborate with startups to create development plans outlining key milestones, critical activities, and timelines. The plan includes recommended tools, processes, and frameworks.',
+        step5Title: 'Regular Meetings and KPI for Progress',
+        step5Desc: 'Establish a routine for board meetings (e.g., bi-weekly or monthly) to assess progress. We define specific KPIs to measure progress, such as user acquisition rates or product milestones.',
+        // --- Mentors ---
+        mentorsTitle: 'Meet Our Expert Mentors',
+        mentor1Name: 'Mostapha Harb',
+        mentor1Title: 'Founder of InsightsGliders | Mediator and Lead expert',
+        mentor1Bio: 'A highly skilled professional with a robust background in engineering and project management, focusing on Machine Learning and AI applications. He excels at guiding projects from prototype validation to real-world application and market readiness.',
+        mentor2Name: 'Nikica Marinković',
+        mentor2Title: 'Founder of AgroAkcelerator | Digital Agricultural Specialist',
+        mentor2Bio: 'A Digital Agricultural Specialist at the UN Food and Agriculture Organization (FAO) in Serbia. He has overseen AgTech and robotics projects exceeding 20 million EUR and is the founder of AgroAkcelerator, empowering student entrepreneurs.',
+        mentor3Name: 'Caterina Giacomelli',
+        mentor3Title: 'Physicist & Data Scientist',
+        mentor3Bio: 'A physicist and data scientist specializing in Earth Observation, geospatial analytics, and applied machine learning for natural hazard monitoring. She is a Venture Builder Fellow at Carbon13, developing startups to address climate change.',
+        mentor4Name: 'Gianni Cristian Iannelli',
+        mentor4Title: 'Co-founder & CEO at Saturnalia | Geospatial Data Expert',
+        mentor4Bio: 'An entrepreneur with over a decade of experience. As CEO of Saturnalia, he leverages remote sensing and AI for the Agritech and Insurtech markets. He previously co-founded Ticinum Aerospace, securing €1.5 million in R&D funding.',
+        mentor5Name: 'Hadi Harb',
+        mentor5Title: 'Finance Professional | Academic Leader',
+        mentor5Bio: 'A finance professional with a Ph.D. and over eight years of experience. He is an Assistant Professor and Coordinator of the Finance & Accounting Department. His research interests include fintech, mobile payments, online lending, and risk management.',
+        mentor6Name: 'Khaled Sami',
+        mentor6Title: 'Sales & Marketing Specialist',
+        mentor6Bio: 'An experienced Business Development Professional with over 7 years in sales, strategic partnerships, and market expansion, particularly in the healthcare, pharmaceuticals, and technology sectors. He holds a Master\'s in Business and Management from Vilnius University.',
+        mentor7Name: 'Georg Rubicko',
+        mentor7Title: 'Business Development Manager',
+        mentor7Bio: 'A seasoned business development manager with extensive experience in the healthcare sector, currently at Mavie Med Holding GmbH. His expertise includes M&A activities, location development, and innovation management focusing on digital assistance technologies and telemedicine.',
+        mentor8Name: 'Ahmed Elsayyad',
+        mentor8Title: 'Business Development & Production Manager',
+        mentor8Bio: 'A skilled manager with experience in local and international markets, currently at ELSAYYAD for Trading & Industry in Egypt. He excels at identifying new business opportunities, building client relations, and aligning production supplies with market demands.',
+        mentor9Name: 'Amani Abi Nassif',
+        mentor9Title: 'Agricultural Engineer | Marketing Manager | Startup Developer',
+        mentor9Bio: 'An Agricultural Engineer and Marketing Manager at Shajara Tayeba Association, where she leads large-scale agricultural exhibitions. Her expertise includes project management, crop production optimization, and developing marketing strategies for innovative agricultural products.',
+        mentor10Name: 'Andreas Salentinig',
+        mentor10Title: 'CEO and Founder at ubicube | Earth Observation Scientist',
+        mentor10Bio: 'An Earth Observation scientist who founded ubicube to drive innovative solutions for urban mapping and environmental monitoring. He also serves as a lecturer at the University of Graz in remote sensing.',
+        mentor11Name: 'Andrés Abarca Jiménez',
+        mentor11Title: 'CEO of ATLAS Consulting | Product Manager',
+        mentor11Bio: 'The CEO of ATLAS Consulting with extensive experience in structural engineering and disaster risk management. He has a strong track record in commercializing research, managing technology transfers, and mentoring research teams toward entrepreneurial success.',
+        mentor12Name: 'Kamal Ahmad',
+        mentor12Title: 'CEO of Economic Resilience',
+        mentor12Bio: 'A specialist in the Economics of Natural Hazards and Climate Change with over 15 years of international experience. He is the Founder and CEO of the Institute for Economic Resilience, developing frameworks to enhance resilience and promote sustainable economic growth.',
+        mentor13Name: 'Carlotta Rodriguez',
+        mentor13Title: 'Architect | Engineer | Risk and Emergency Manager',
+        mentor13Bio: 'The Founder and Managing Director of Adenium Risk and Coaching in Dubai. With a Ph.D. in Risk and Emergency Management, she helps governments enhance disaster resilience and serves as Vice-President of a PIARC technical committee.',
+        mentor14Name: 'Daniele Bortolotti',
+        mentor14Title: 'Staff R&D Engineer',
+        mentor14Bio: 'A skilled engineer in Berlin specializing in embedded software development. He was instrumental in developing a neuromorphic processor under DARPA funding, filing multiple patents and leading a successful €15 million funding round.',
+        // --- Footer (Copied from index) ---
+        footerAbout: 'نمكن الجامعات والمؤسسات الأكاديمية في المنطقة من تحقيق حضور عالمي عبر الاستشارات والخدمات المهنية.',
+        footerServingTitle: 'نخدم الشرق الأCوسط وشمال أفريقيا',
+        footerServingText: 'خبرة متخصصة في النشر الأكاديمي بالعربية والإنجليزية.',
+        contactInfoTitle: 'معلومات التواصل',
+        addr1: 'فندق الميدان مبنى المدرج',
+        addr2: 'الطابق السادس شارع الميدان',
+        addr3: 'ند الشبا دبي الإمارات العربية المتحدة',
+        formTitle: 'تواصل معنا',
+        labelName: 'الاسم الكامل *',
+        labelEmail: 'البريد الإلكتر الإلكتروني *',
+        labelOrg: 'الجهة أو المؤسسة',
+        labelService: 'الخدمة المطلوبة',
+        svcSelect: 'اختر خدمة',
+        svcMentoring: 'Expert-Mentor Matching',
+        svcRanking: 'تعزيز تصنيفات الجامعات',
+        svcIndexing: 'فهرسة المجلات',
+        svcTranslation: 'الترجمة والمراجعة',
+        svcConsulting: 'استشارات البحث العلمي',
+        svcOther: 'أخرى',
+        labelMessage: 'الرسالة *',
+        phMessage: 'حدثنا عن متطلباتك',
+        btnSubmit: 'إرسال الرسالة',
+        errName: 'يرجى إدخال الاسم الكامل.',
+        errEmail: 'يرجى إدخال بريد صحيح.',
+        errMessage: 'يرجى كتابة ملخص قصير لاحتياجاتك.',
+        formIncomplete: 'يرجى استكمال الحقول المظللة.',
+        formThanks: 'شكرا لك سوف يفتح تطبيق البريد الآن وإن لم يفتح يرجى مراسلتنا على info@academiasmartfirm.com',
+        rights: 'جميع الحقوق محفوظة 2025 أكاديميا سمارت فيرم'
+      }
+    };
+    // Helper to apply language
+    function applyLang(lang){
+      const dict = i18n[lang];
+      // Update text nodes
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if(dict[key] !== undefined){
+          el.textContent = dict[key];
+        }
+      });
+      // Placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if(dict[key] !== undefined){
+          el.setAttribute('placeholder', dict[key]);
+        }
+      });
+      // Direction and lang
+      document.documentElement.setAttribute('lang', lang === 'ar' ? 'ar' : 'en');
+      document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+      // Toggle button state
+      document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+      document.getElementById('btnAr').classList.toggle('active', lang === 'ar');
+      document.getElementById('btnEn').setAttribute('aria-pressed', String(lang === 'en'));
+      document.getElementById('btnAr').setAttribute('aria-pressed', String(lang === 'ar'));
+    }
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+    // Fade in on scroll
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, observerOptions);
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    // Header effect
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('.header');
+      if (window.scrollY > 100) {
+        header.style.background = 'rgba(255, 255, 255, 0.98)';
+        header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+      } else {
+        header.style.background = 'rgba(255, 255, 255, 0.95)';
+        header.style.boxShadow = 'none';
+      }
+    });
+    // Language switch events
+    document.getElementById('btnEn').addEventListener('click', () => applyLang('en'));
+    document.getElementById('btnAr').addEventListener('click', () => applyLang('ar'));
+    // Form behavior
+    const byId = id => document.getElementById(id);
+    const emailOK = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    const form = byId('contactForm');
+    const alertBox = byId('formAlert');
+    const submitBtn = byId('submitBtn');
+    function setError(input, msgId, show) {
+      const msgEl = byId(msgId);
+      if (show) {
+        input.classList.add('input-error');
+        msgEl.classList.add('active');
+      } else {
+        input.classList.remove('input-error');
+        msgEl.classList.add('active');
+      }
+    }
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = byId('name');
+      const email = byId('email');
+      const org = byId('organization');
+      const service = byId('service');
+      const message = byId('message');
+      let valid = true;
+      if (!name.value.trim()) { setError(name, 'err-name', true); valid = false; } else { setError(name, 'err-name', false); }
+      if (!emailOK(email.value.trim())) { setError(email, 'err-email', true); valid = false; } else { setError(email, 'err-email', false); }
+      if (!message.value.trim()) { setError(message, 'err-message', true); valid = false; } else { setError(message, 'err-message', false); }
+      // Current language
+      const lang = document.documentElement.getAttribute('lang') === 'ar' ? 'ar' : 'en';
+      const dict = i18n[lang];
+      if (!valid) {
+        alertBox.textContent = dict.formIncomplete;
+        alertBox.classList.add('show');
+        return;
+      }
+      const emailBody =
+        `Name: ${encodeURIComponent(name.value.trim())}%0D%0A` +
+        `Email: ${encodeURIComponent(email.value.trim())}%0D%0A` +
+        `Organization: ${encodeURIComponent(org.value.trim() || (lang === 'ar' ? 'غير محدد' : 'Not specified'))}%0D%0A` +
+        `Service of Interest: ${encodeURIComponent(service.value || (lang === 'ar' ? 'غير محدد' : 'Not specified'))}%0D%0A%0D%0A` +
+        `Message:%0D%0A${encodeURIComponent(message.value.trim())}`;
+      const subjectBase = lang === 'ar' ? 'رسالة من نموذج التواصل' : 'Contact Form Submission';
+      const mailtoLink = `mailto:info@academiasmartfirm.com?subject=${encodeURIComponent(subjectBase)}&body=${emailBody}`;
+      submitBtn.setAttribute('disabled', 'true');
+      alertBox.textContent = dict.formThanks;
+      alertBox.classList.add('show');
+      window.location.href = mailtoLink;
+      setTimeout(() => {
+        submitBtn.removeAttribute('disabled');
+        form.reset();
+      }, 800);
+    });
+    ['name','email','message'].forEach(id => {
+      byId(id).addEventListener('input', () => {
+        alertBox.classList.remove('show');
+      });
+    });
+    
+    // NOTE: Testimonial slider script is removed as it's not used on this page.
+
+    // Initialize default language
+    applyLang('en');
+  </script>
+</body>
+</html>
