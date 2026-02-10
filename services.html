@@ -205,7 +205,24 @@
               <a href="mailto:info@academiasmartfirm.com" itemprop="email">info@academiasmartfirm.com</a>
             </p>
           </address>
+        </div>
+      </div>
 
+      <div class="footer-right">
+        <div class="footer-section">
+          <h3 data-i18n="footerLinksTitle">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html" data-i18n="navHome">Home</a></li>
+            <li><a href="services.html" data-i18n="navServices">Academic Services</a></li>
+            <li><a href="industry.html" data-i18n="navIndustry">Industry and Commercialization</a></li>
+            <li><a href="about.html" data-i18n="navAbout">About</a></li>
+            <li><a href="testimonials.html" data-i18n="navTestimonials">Testimonials</a></li>
+            <li><a href="contact.html" data-i18n="navContact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3 data-i18n="footerLocationTitle">Location</h3>
           <div class="map-card" aria-label="Map to our address">
             <iframe
               loading="lazy"
@@ -215,52 +232,6 @@
             ></iframe>
           </div>
         </div>
-      </div>
-
-      <div class="contact-form">
-        <h3 data-i18n="formTitle">Get In Touch</h3>
-        <div id="formAlert" class="form-alert" role="status" aria-live="polite"></div>
-
-        <form id="contactForm" novalidate>
-          <div class="form-group">
-            <label for="name" data-i18n="labelName">Full Name *</label>
-            <input type="text" id="name" name="name" required aria-label="Full Name" />
-            <div class="error-text" id="err-name" data-i18n="errName">Please enter your full name.</div>
-          </div>
-
-          <div class="form-group">
-            <label for="email" data-i18n="labelEmail">Email Address *</label>
-            <input type="email" id="email" name="email" required aria-label="Email Address" />
-            <div class="error-text" id="err-email" data-i18n="errEmail">Please enter a valid email address.</div>
-          </div>
-
-          <div class="form-group">
-            <label for="organization" data-i18n="labelOrg">Organization or Institution</label>
-            <input type="text" id="organization" name="organization" aria-label="Organization or Institution" />
-          </div>
-
-          <div class="form-group">
-            <label for="service" data-i18n="labelService">Service of Interest</label>
-            <select id="service" name="service" aria-label="Service of Interest">
-              <option value="" data-i18n="svcSelect">Select a service...</option>
-              <option value="ranking" data-i18n="svcRanking">University Ranking Enhancement</option>
-              <option value="indexing" data-i18n="svcIndexing">Journal Indexing Services</option>
-              <option value="translation" data-i18n="svcTranslation">Translation and Proofreading</option>
-              <option value="consulting" data-i18n="svcConsulting">Research Consulting</option>
-              <option value="industry" data-i18n="svcIndustry">Industry Collaboration</option>
-              <option value="patents" data-i18n="svcPatents">Patent Licensing & Commercialization</option>
-              <option value="other" data-i18n="svcOther">Other</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="message" data-i18n="labelMessage">Message *</label>
-            <textarea id="message" name="message" required aria-label="Message" data-i18n-placeholder="phMessage" placeholder="Tell us about your requirements..."></textarea>
-            <div class="error-text" id="err-message" data-i18n="errMessage">Please share a short summary of your needs.</div>
-          </div>
-
-          <button type="submit" class="submit-btn" id="submitBtn" data-i18n="btnSubmit">Send Message</button>
-        </form>
       </div>
 
       <div class="footer-bottom">

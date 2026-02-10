@@ -171,6 +171,8 @@ const i18n = {
     footerServingTitle: 'Serving the MENA Region',
     footerServingText: 'Specialized expertise in both Arabic and English academic publications.',
     contactInfoTitle: 'Contact Information',
+    footerLinksTitle: 'Quick Links',
+    footerLocationTitle: 'Location',
     addr1: 'The Meydan Grandstand',
     addr2: 'Sixth Floor Meydan Road',
     addr3: 'Nad Al Sheba Dubai UAE',
@@ -196,7 +198,8 @@ const i18n = {
     errEmail: 'Please enter a valid email address.',
     errMessage: 'Please share a short summary of your needs.',
     formIncomplete: 'Please complete the highlighted fields.',
-    formThanks: 'Thank you. Your email app will open now. If it does not, please email us at info@academiasmartfirm.com',
+    formThanks: 'Thank you. Your message has been sent successfully.',
+    formError: 'Something went wrong while sending. Please email us at info@academiasmartfirm.com',
 
     rights: '© 2025 Academia Smart Firm. All rights reserved.'
   },
@@ -372,6 +375,8 @@ const i18n = {
     footerServingTitle: 'نخدم الشرق الأوسط وشمال أفريقيا',
     footerServingText: 'خبرة متخصصة في النشر الأكاديمي بالعربية والإنجليزية.',
     contactInfoTitle: 'معلومات التواصل',
+    footerLinksTitle: 'روابط سريعة',
+    footerLocationTitle: 'الموقع',
     addr1: 'فندق الميدان مبنى المدرج',
     addr2: 'الطابق السادس شارع الميدان',
     addr3: 'ند الشبا دبي الإمارات العربية المتحدة',
@@ -397,7 +402,8 @@ const i18n = {
     errEmail: 'يرجى إدخال بريد صحيح.',
     errMessage: 'يرجى كتابة ملخص قصير لاحتياجاتك.',
     formIncomplete: 'يرجى استكمال الحقول المظللة.',
-    formThanks: 'شكرا لك سوف يفتح تطبيق البريد الآن وإن لم يفتح يرجى مراسلتنا على info@academiasmartfirm.com',
+    formThanks: 'شكرا لك تم إرسال الرسالة بنجاح.',
+    formError: 'حدث خطأ أثناء الإرسال يرجى مراسلتنا على info@academiasmartfirm.com',
 
     rights: 'جميع الحقوق محفوظة 2025 أكاديميا سمارت فيرم'
   }
@@ -534,7 +540,7 @@ function initForm(){
     }
   }
 
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
 
     const name = byId('name');
@@ -559,26 +565,31 @@ function initForm(){
       return;
     }
 
-    const emailBody =
-      `Name: ${encodeURIComponent(name.value.trim())}%0D%0A` +
-      `Email: ${encodeURIComponent(email.value.trim())}%0D%0A` +
-      `Organization: ${encodeURIComponent(org.value.trim() || (lang === 'ar' ? 'غير محدد' : 'Not specified'))}%0D%0A` +
-      `Service of Interest: ${encodeURIComponent(service.value || (lang === 'ar' ? 'غير محدد' : 'Not specified'))}%0D%0A%0D%0A` +
-      `Message:%0D%0A${encodeURIComponent(message.value.trim())}`;
-
-    const subjectBase = lang === 'ar' ? 'رسالة من نموذج التواصل' : 'Contact Form Submission';
-    const mailtoLink = `mailto:info@academiasmartfirm.com?subject=${encodeURIComponent(subjectBase)}&body=${emailBody}`;
-
     submitBtn.setAttribute('disabled', 'true');
-    alertBox.textContent = dict.formThanks;
-    alertBox.classList.add('show');
+    alertBox.textContent = '';
+    alertBox.classList.remove('show');
 
-    window.location.href = mailtoLink;
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
 
-    setTimeout(() => {
+      if (response.ok) {
+        alertBox.textContent = dict.formThanks;
+        alertBox.classList.add('show');
+        form.reset();
+      } else {
+        alertBox.textContent = dict.formError;
+        alertBox.classList.add('show');
+      }
+    } catch (err) {
+      alertBox.textContent = dict.formError;
+      alertBox.classList.add('show');
+    } finally {
       submitBtn.removeAttribute('disabled');
-      form.reset();
-    }, 800);
+    }
   });
 
   ['name','email','message'].forEach(id => {
