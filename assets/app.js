@@ -2,8 +2,8 @@
 const i18n = {
   en: {
     navHome: 'Home',
-    navServices: 'Services',
-    navIndustry: 'Industry Collaboration',
+    navServices: 'Academic Services',
+    navIndustry: 'Industry and Commercialization',
     navAbout: 'About',
     navTestimonials: 'Testimonials',
     navContact: 'Contact',
@@ -203,8 +203,8 @@ const i18n = {
 
   ar: {
     navHome: 'الرئيسية',
-    navServices: 'الخدمات',
-    navIndustry: 'التعاون مع الصناعة',
+    navServices: 'الخدمات الأكاديمية',
+    navIndustry: 'الصناعة والتسويق التجاري',
     navAbout: 'من نحن',
     navTestimonials: 'آراء العملاء',
     navContact: 'تواصل معنا',

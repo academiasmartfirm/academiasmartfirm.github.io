@@ -48,6 +48,7 @@ html[dir="rtl"] body{
   padding: 1rem 5%;
   max-width: 1400px;
   margin: 0 auto;
+  min-height: 72px;
 }
 
 .logo {
@@ -75,23 +76,20 @@ html[dir="rtl"] body{
   font-weight: 500;
   transition: color 0.3s ease;
   position: relative;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 1rem;
 }
 
-.nav-links a:hover { color: var(--brand-start); }
-.nav-links a.active { color: var(--brand-end); }
-.nav-links a.active::after { width: 100%; }
-
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -5px;
-  left: 0;
+.nav-links a:hover {
+  color: var(--brand-end);
+  background: rgba(66,165,255,0.12);
+}
+.nav-links a.active {
+  color: #fff;
   background: linear-gradient(135deg, var(--brand-start) 0%, var(--brand-end) 100%);
-  transition: width 0.3s ease;
+  box-shadow: 0 6px 16px rgba(66,165,255,0.25);
 }
-.nav-links a:hover::after { width: 100%; }
 
 /* Mobile menu */
 .menu-toggle{
@@ -148,7 +146,10 @@ html[dir="rtl"] .mobile-panel{
   font-weight: 600;
 }
 .mobile-panel a:hover{ background: var(--brand-soft); color: var(--brand-end); }
-.mobile-panel a.active{ background: var(--brand-soft); color: var(--brand-end); }
+.mobile-panel a.active{
+  background: linear-gradient(135deg, var(--brand-start) 0%, var(--brand-end) 100%);
+  color: #fff;
+}
 
 /* Language toggle */
 .lang-toggle{
@@ -405,6 +406,7 @@ html[dir="rtl"] .patent-list li::before {
   color: var(--ink);
 }
 .highlight-box strong { color: #0b3d6e; }
+
 
 /* Impact */
 .stats {
