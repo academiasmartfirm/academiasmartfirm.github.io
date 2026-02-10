@@ -213,6 +213,104 @@
     .service-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; color: var(--ink); }
     .service-card p { color: var(--ink-sub); line-height: 1.6; }
 
+    /* Industry Collaboration + Commercialization */
+    .industry {
+      background: radial-gradient(1200px 600px at 10% -10%, rgba(66,165,255,0.12), transparent 60%),
+                  radial-gradient(900px 500px at 90% 10%, rgba(30,136,229,0.10), transparent 55%);
+    }
+    .industry-wrap {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .industry-lead {
+      font-size: 1.1rem;
+      color: var(--ink-sub);
+      line-height: 1.8;
+      margin-bottom: 1.4rem;
+    }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 1.2rem;
+    }
+    .pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 6px 16px rgba(66,165,255,0.12);
+      font-weight: 600;
+      color: #0b3d6e;
+      font-size: 0.9rem;
+    }
+    .industry-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    }
+    .industry-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 1rem;
+      color: var(--ink);
+    }
+    .benefit-list,
+    .engagement-list,
+    .patent-list {
+      list-style: none;
+      margin: 1rem 0 0;
+      display: grid;
+      gap: 0.7rem;
+    }
+    .benefit-list li,
+    .engagement-list li,
+    .patent-list li {
+      background: var(--brand-soft);
+      border: 1px solid rgba(66,165,255,0.18);
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      color: var(--ink);
+      position: relative;
+      padding-left: 2.2rem;
+    }
+    .benefit-list li::before,
+    .engagement-list li::before,
+    .patent-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0.8rem;
+      color: var(--brand-end);
+      font-weight: 700;
+    }
+    html[dir="rtl"] .benefit-list li,
+    html[dir="rtl"] .engagement-list li,
+    html[dir="rtl"] .patent-list li {
+      padding-left: 1rem;
+      padding-right: 2.2rem;
+    }
+    html[dir="rtl"] .benefit-list li::before,
+    html[dir="rtl"] .engagement-list li::before,
+    html[dir="rtl"] .patent-list li::before {
+      left: auto;
+      right: 0.8rem;
+    }
+    .industry-split {
+      display: grid;
+      gap: 1.5rem;
+    }
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(66,165,255,0.10) 0%, rgba(30,136,229,0.12) 100%);
+      border: 1px solid rgba(66,165,255,0.25);
+      padding: 1.25rem;
+      border-radius: 16px;
+      color: var(--ink);
+    }
+    .highlight-box strong { color: #0b3d6e; }
+
     /* Our Impact */
     .stats {
       background: linear-gradient(135deg, var(--brand-end) 0%, var(--brand-deep) 100%);
@@ -440,6 +538,7 @@
       .hero h1 { font-size: 2.5rem; }
       .hero p { font-size: 1.1rem; }
       .about-content { grid-template-columns: 1fr; gap: 2rem; }
+      .industry-wrap { grid-template-columns: 1fr; }
       .section { padding: 4rem 5%; }
       .footer-content { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
       html[dir="rtl"] .footer-content{ text-align: center; }
@@ -485,6 +584,7 @@ html[dir="rtl"] .addr-icon {
         <ul class="nav-links">
           <li><a href="#home" data-i18n="navHome">Home</a></li>
           <li><a href="#services" data-i18n="navServices">Services</a></li>
+          <li><a href="#industry" data-i18n="navIndustry">Industry Collaboration</a></li>
           <li><a href="#about" data-i18n="navAbout">About</a></li>
           <li><a href="#testimonials" data-i18n="navTestimonials">Testimonials</a></li>
           <li><a href="#contact" data-i18n="navContact">Contact</a></li>
@@ -537,6 +637,81 @@ html[dir="rtl"] .addr-icon {
         <div class="service-icon">📈</div>
         <h3 data-i18n="service4Title">Research Consulting</h3>
         <p data-i18n="service4Desc">Comprehensive guidance on research strategy, academic visibility enhancement, and international collaboration development to amplify your global presence.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry Collaboration + Commercialization -->
+  <section id="industry" class="section industry">
+    <h2 class="section-title fade-in" data-i18n="industryTitle">Industry Collaboration and Commercialization</h2>
+
+    <div class="industry-wrap">
+      <div class="fade-in">
+        <p class="industry-lead" data-i18n="industryIntro1">
+          Academia’s Smart Firm is an independent bridge between universities and industry, helping both sides identify, structure, and sustain collaborations that are academically credible and industrially relevant. We operate across disciplines and sectors, matching institutional strengths with real-world needs without promoting a single predefined partner.
+        </p>
+        <p class="industry-lead" data-i18n="industryIntro2">
+          Our experience spans aviation, automotive, advanced manufacturing and metals, semiconductors and digital technologies, tourism and services, as well as social sciences and policy-oriented industries. This cross-sectoral approach enables diversified, resilient, and mission-aligned engagement.
+        </p>
+
+        <div class="highlight-box">
+          <strong data-i18n="industryNeutralStrong">Neutral facilitation.</strong>
+          <span data-i18n="industryNeutralText">We align expectations, governance, and continuity so partnerships deliver results over time.</span>
+        </div>
+
+        <div class="pill-row" aria-label="Sectors">
+          <span class="pill" data-i18n="sector1">Aviation</span>
+          <span class="pill" data-i18n="sector2">Automotive</span>
+          <span class="pill" data-i18n="sector3">Advanced Manufacturing</span>
+          <span class="pill" data-i18n="sector4">Semiconductors</span>
+          <span class="pill" data-i18n="sector5">Digital Technologies</span>
+          <span class="pill" data-i18n="sector6">Tourism &amp; Services</span>
+          <span class="pill" data-i18n="sector7">Social Sciences &amp; Policy</span>
+        </div>
+
+        <div class="industry-card fade-in" style="margin-top: 2rem;">
+          <h3 data-i18n="patentsTitle">Patent Licensing and Commercialization</h3>
+          <p class="industry-lead" data-i18n="patentsIntro">
+            We help universities activate and monetize existing patent portfolios when internal capacity or market reach is limited. Our process is evidence-driven and designed to generate tangible returns.
+          </p>
+          <ul class="patent-list">
+            <li data-i18n="patent1">Structured portfolio review led by subject-matter experts with academic and industry experience.</li>
+            <li data-i18n="patent2">Recommendations on which patents to retain and protect, license actively, or release.</li>
+            <li data-i18n="patent3">Strategic positioning toward industry segments with realistic commercial uptake.</li>
+            <li data-i18n="patent4">Direct outreach to industry partners to explore licensing opportunities.</li>
+            <li data-i18n="patent5">Support through negotiation and structuring focused on sustainable income.</li>
+          </ul>
+          <div class="highlight-box" style="margin-top: 1.2rem;">
+            <strong data-i18n="patentsProofStrong">Proven outcomes.</strong>
+            <span data-i18n="patentsProofText">This approach has been implemented multiple times, generating licensing agreements and direct income for partner universities.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="industry-split">
+        <div class="industry-card fade-in">
+          <h3 data-i18n="industryBenefitsTitle">What Universities Gain</h3>
+          <ul class="benefit-list">
+            <li data-i18n="benefit1">Stronger academic relevance grounded in real industrial and societal challenges.</li>
+            <li data-i18n="benefit2">Enhanced international visibility through sustained collaboration with global industry actors.</li>
+            <li data-i18n="benefit3">Improved research outputs, including co-authored papers and practice-informed questions.</li>
+            <li data-i18n="benefit4">Expanded internal capacity via applied datasets, validation environments, and standards.</li>
+            <li data-i18n="benefit5">Better positioning in assessments through demonstrated impact and engagement.</li>
+            <li data-i18n="benefit6">New funding and sustainability pathways beyond fragmented projects.</li>
+          </ul>
+        </div>
+
+        <div class="industry-card fade-in">
+          <h3 data-i18n="industryEngagementTitle">Levels of Engagement We Facilitate</h3>
+          <ul class="engagement-list">
+            <li data-i18n="engage1">Co-hosted events, workshops, and flagship conferences.</li>
+            <li data-i18n="engage2">Co-authored publications, white papers, and applied outputs.</li>
+            <li data-i18n="engage3">Joint research projects aligned to industrial problem statements.</li>
+            <li data-i18n="engage4">Co-supervised PhD and postdoctoral projects in industry-relevant themes.</li>
+            <li data-i18n="engage5">Researcher mobility, fellowships, and industry internships.</li>
+            <li data-i18n="engage6">Programme-level partnerships uniting multiple projects under one framework.</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -824,6 +999,7 @@ html[dir="rtl"] .addr-icon {
       en: {
         navHome: 'Home',
         navServices: 'Services',
+        navIndustry: 'Industry Collaboration',
         navAbout: 'About',
         navTestimonials: 'Testimonials',
         navContact: 'Contact',
@@ -841,6 +1017,42 @@ html[dir="rtl"] .addr-icon {
         service3Desc: 'Expert linguistic services supporting both Arabic and English publications, ensuring the highest academic and linguistic standards for your research output.',
         service4Title: 'Research Consulting',
         service4Desc: 'Comprehensive guidance on research strategy, academic visibility enhancement, and international collaboration development to amplify your global presence.',
+
+        industryTitle: 'Industry Collaboration and Commercialization',
+        industryIntro1: 'Academia’s Smart Firm is an independent bridge between universities and industry, helping both sides identify, structure, and sustain collaborations that are academically credible and industrially relevant. We operate across disciplines and sectors, matching institutional strengths with real-world needs without promoting a single predefined partner.',
+        industryIntro2: 'Our experience spans aviation, automotive, advanced manufacturing and metals, semiconductors and digital technologies, tourism and services, as well as social sciences and policy-oriented industries. This cross-sectoral approach enables diversified, resilient, and mission-aligned engagement.',
+        industryNeutralStrong: 'Neutral facilitation.',
+        industryNeutralText: 'We align expectations, governance, and continuity so partnerships deliver results over time.',
+        sector1: 'Aviation',
+        sector2: 'Automotive',
+        sector3: 'Advanced Manufacturing',
+        sector4: 'Semiconductors',
+        sector5: 'Digital Technologies',
+        sector6: 'Tourism & Services',
+        sector7: 'Social Sciences & Policy',
+        industryBenefitsTitle: 'What Universities Gain',
+        benefit1: 'Stronger academic relevance grounded in real industrial and societal challenges.',
+        benefit2: 'Enhanced international visibility through sustained collaboration with global industry actors.',
+        benefit3: 'Improved research outputs, including co-authored papers and practice-informed questions.',
+        benefit4: 'Expanded internal capacity via applied datasets, validation environments, and standards.',
+        benefit5: 'Better positioning in assessments through demonstrated impact and engagement.',
+        benefit6: 'New funding and sustainability pathways beyond fragmented projects.',
+        industryEngagementTitle: 'Levels of Engagement We Facilitate',
+        engage1: 'Co-hosted events, workshops, and flagship conferences.',
+        engage2: 'Co-authored publications, white papers, and applied outputs.',
+        engage3: 'Joint research projects aligned to industrial problem statements.',
+        engage4: 'Co-supervised PhD and postdoctoral projects in industry-relevant themes.',
+        engage5: 'Researcher mobility, fellowships, and industry internships.',
+        engage6: 'Programme-level partnerships uniting multiple projects under one framework.',
+        patentsTitle: 'Patent Licensing and Commercialization',
+        patentsIntro: 'We help universities activate and monetize existing patent portfolios when internal capacity or market reach is limited. Our process is evidence-driven and designed to generate tangible returns.',
+        patent1: 'Structured portfolio review led by subject-matter experts with academic and industry experience.',
+        patent2: 'Recommendations on which patents to retain and protect, license actively, or release.',
+        patent3: 'Strategic positioning toward industry segments with realistic commercial uptake.',
+        patent4: 'Direct outreach to industry partners to explore licensing opportunities.',
+        patent5: 'Support through negotiation and structuring focused on sustainable income.',
+        patentsProofStrong: 'Proven outcomes.',
+        patentsProofText: 'This approach has been implemented multiple times, generating licensing agreements and direct income for partner universities.',
 
         statsTitle: 'Our Impact',
         stat1Label: 'Journals Indexed',
@@ -922,6 +1134,7 @@ testimonial3Author: 'Director of Research at a leading university in Saudi Arabi
       ar: {
         navHome: 'الرئيسية',
         navServices: 'الخدمات',
+        navIndustry: 'التعاون مع الصناعة',
         navAbout: 'من نحن',
         navTestimonials: 'آراء العملاء',
         navContact: 'تواصل معنا',
@@ -939,6 +1152,42 @@ testimonial3Author: 'Director of Research at a leading university in Saudi Arabi
         service3Desc: 'خدمات لغوية احترافية تدعم النشر العربي والإنجليزي مع الالتزام بأعلى المعايير الأكاديمية واللغوية.',
         service4Title: 'استشارات البحث العلمي',
         service4Desc: 'إرشاد شامل في استراتيجية البحث وتعزيز الظهور الأكاديمي وتطوير التعاون الدولي لرفع الحضور العالمي.',
+
+        industryTitle: 'التعاون مع الصناعة والتسويق التجاري',
+        industryIntro1: 'تعمل أكاديميا سمارت فيرم كحلقة وصل مستقلة بين الجامعات والصناعة، لمساعدة الطرفين على تحديد الشراكات وتنظيمها واستدامتها بما يضمن المصداقية الأكاديمية والملاءمة الصناعية. نعمل عبر تخصصات وقطاعات متعددة لنطابق نقاط القوة المؤسسية مع الاحتياجات الواقعية دون الترويج لشريك محدد.',
+        industryIntro2: 'تمتد خبرتنا إلى الطيران والسيارات والتصنيع المتقدم والمعادن وأشباه الموصلات والتقنيات الرقمية والسياحة والخدمات، إضافة إلى العلوم الاجتماعية وصناعات السياسات العامة. يتيح هذا النهج تنوعا ومرونة وتوافقا مع الرسالة الأكاديمية على المدى الطويل.',
+        industryNeutralStrong: 'تسهيل محايد.',
+        industryNeutralText: 'نوائم التوقعات والحوكمة والاستمرارية لضمان نتائج مستدامة للشراكات.',
+        sector1: 'الطيران',
+        sector2: 'السيارات',
+        sector3: 'التصنيع المتقدم',
+        sector4: 'أشباه الموصلات',
+        sector5: 'التقنيات الرقمية',
+        sector6: 'السياحة والخدمات',
+        sector7: 'العلوم الاجتماعية والسياسات',
+        industryBenefitsTitle: 'مكاسب الجامعات',
+        benefit1: 'تعزيز الملاءمة الأكاديمية بالارتباط بتحديات صناعية ومجتمعية حقيقية.',
+        benefit2: 'رفع الظهور الدولي عبر تعاون مستدام مع جهات صناعية عالمية.',
+        benefit3: 'تحسين المخرجات البحثية بما فيها الأبحاث المشتركة والأسئلة الميدانية.',
+        benefit4: 'تطوير القدرات الداخلية عبر البيانات التطبيقية وبيئات التحقق والمعايير.',
+        benefit5: 'تحسين الترتيب والتقييم عبر إبراز الأثر والتعاون.',
+        benefit6: 'مسارات تمويل واستدامة جديدة بعيدا عن المشاريع المجزأة.',
+        industryEngagementTitle: 'مستويات الشراكة التي نسهلها',
+        engage1: 'فعاليات مشتركة وورش عمل ومؤتمرات محورية.',
+        engage2: 'منشورات مشتركة وأوراق بيضاء ومخرجات تطبيقية.',
+        engage3: 'مشاريع بحثية مشتركة مرتبطة بتحديات صناعية محددة.',
+        engage4: 'إشراف مشترك على الدكتوراه وما بعد الدكتوراه ضمن محاور ذات صلة.',
+        engage5: 'تنقل الباحثين وزمالات صناعية وتدريب عملي.',
+        engage6: 'شراكات برامجية طويلة المدى تجمع عدة مشاريع ضمن إطار موحد.',
+        patentsTitle: 'ترخيص البراءات والتسويق التجاري',
+        patentsIntro: 'نساعد الجامعات على تفعيل محافظ البراءات الحالية وتحويلها إلى دخل مستدام عندما تكون القدرات الداخلية أو الوصول للسوق محدودا. نهجنا قائم على الأدلة ومصمم لتحقيق عوائد ملموسة.',
+        patent1: 'مراجعة منظمة للمحفظة بقيادة خبراء ذوي خبرة أكاديمية وصناعية.',
+        patent2: 'توصيات بشأن البراءات الواجب الاحتفاظ بها وحمايتها أو ترخيصها أو إتاحتها.',
+        patent3: 'توجيه استراتيجي نحو قطاعات صناعية ذات فرص تجارية واقعية.',
+        patent4: 'تواصل مباشر مع الشركاء الصناعيين لاستكشاف فرص الترخيص.',
+        patent5: 'دعم في التفاوض وهيكلة الاتفاقيات بهدف تحقيق دخل مستدام.',
+        patentsProofStrong: 'نتائج مثبتة.',
+        patentsProofText: 'طُبّق هذا النهج عدة مرات وأسفر عن اتفاقيات ترخيص ودخل مباشر للجامعات الشريكة.',
 
         statsTitle: ' قيمة تأثيرنا',
         stat1Label: 'مجلات مفهرسة',
